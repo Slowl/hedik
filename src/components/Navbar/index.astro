@@ -1,0 +1,120 @@
+---
+const navLinks = [
+	{
+		id: undefined,
+		openInNewTab: false,
+		title: 'work',
+		url: '#',
+	},
+	{
+		id: undefined,
+		openInNewTab: false,
+		title: 'projects',
+		url: '#',
+	},
+	{
+		id: undefined,
+		openInNewTab: false,
+		title: 'contact',
+		url: '#',
+	},
+];
+---
+
+<nav id='navbar'>
+	<div class='left-container' />
+	<div class='right-container'>
+		{navLinks.map((link) => (
+			<a
+				href={link.url}
+				id={link.id}
+				target={link.openInNewTab ? '_blank' : '_self'}
+				class:list={['nav-link', { 'nav-link-current': false }]}
+			>
+				{link.title}
+			</a>
+		))}
+	</div>
+</nav>
+
+<style>
+	nav {
+		display: flex;
+		justify-content: space-between;
+		padding: 0 var(--size-s);
+		border-bottom: 1px solid var(--black);
+		border-bottom-style: dotted;
+		position: sticky;
+		top: 0;
+		background-color: var(--white);
+		transition: var(--transition-slow);
+		z-index: 999;
+	}
+
+	.nav-hidden {
+		transform: translateY(-100%);
+	}
+	
+	.right-container {
+		display: flex;
+		gap: var(--size-md);
+	}
+
+	.nav-link {
+		color: var(--black);
+		text-decoration: none;
+		padding: var(--size-lg) 0 var(--size-s);
+	}
+	.nav-link::after {
+		display: block;
+		content: '';
+		background-color: var(--accent);
+		width: 6px; height: 6px;
+		margin: auto;
+		border-radius: 50%;
+		visibility: hidden;
+		opacity: 0;
+		transform: translateY(10px);
+		transition: var(--transition-default);
+	}
+	.nav-link:is(:hover, :focus-visible)::after {
+		visibility: visible;
+		opacity: 1;
+		transform: translateY(4px);
+	}
+	.nav-link-current::after {
+		visibility: visible;
+		opacity: 1;
+		transform: translateY(4px);
+	}
+</style>
+
+<script>
+	import { throttle } from '@/utils/index';
+
+	let previousScrollPosition = Math.min(window.scrollY, 0);
+	const scrollDirection = () => {
+			let scrollPosition = window.scrollY;
+			let scrollDirection: 'down' | 'up' | undefined = undefined;
+
+			(scrollPosition <= 0)
+				? scrollDirection = 'up'
+				: (scrollPosition > previousScrollPosition)
+					? scrollDirection = 'down'
+					: scrollDirection = 'up';
+
+			previousScrollPosition = scrollPosition;
+
+			return scrollDirection;
+	};
+
+	const handleScroll = () => {
+		const navContainer = document.getElementById('navbar');
+
+		scrollDirection() === 'down'
+			? navContainer?.classList.add('nav-hidden')
+			: navContainer?.classList.remove('nav-hidden');
+	};
+	
+	window.addEventListener('scroll', () => throttle(handleScroll, 400));
+</script>

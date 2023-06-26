@@ -1,0 +1,90 @@
+---
+import Icon from 'astro-icon';
+
+interface Props {
+	title: string;
+	pageUrl: string;
+}
+
+const { title, pageUrl } = Astro.props;
+---
+
+<section class='preview-section' id={`preview-section-${title}`}>
+	<h2 class='section-title'>
+		{title}
+	</h2>
+	<div class='section-content'>
+		<div class='cards-container'>
+			<slot />
+		</div>
+		<a class='see-more' href={pageUrl}>
+			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+		</a>
+	</div>
+</section>
+
+<style>
+	.preview-section {
+		display: flex;
+		align-items: center;
+		padding: 5rem 0 15rem;
+	}
+	.section-title {
+		font-size: var(--font-heading-default);
+		font-weight: 400;
+		text-orientation: mixed;
+		writing-mode: vertical-lr;
+		transform: rotate(180deg) translateX(110px);
+	}
+	.section-title:before {
+		content: '';
+		display: block;
+		width: 15px;
+		height: 5px;
+		margin: auto;
+		border-radius: 50px;
+		background-color: var(--accent);
+		transform: translateX(-5px);
+	}
+	.section-content {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		margin-left: -95px;
+	}
+	.cards-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--size-md);
+	}
+	.see-more {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		color: var(--black);
+		transition: var(--transition-default);
+	}
+	.see-more:after {
+		content: 'see more';
+		display: block;
+		position: absolute;
+		left: 15px;
+		font-size: var(--font-small);
+		white-space:nowrap;
+		opacity: 0;
+		visibility: hidden;
+		transition: var(--transition-default);
+	}
+	.see-more:hover {
+		transform: translate(-10px);
+		color: var(--white);
+	}
+	.see-more:hover:after {
+		transform: translateX(-10px);
+		color: var(--black);
+		opacity: 1;
+		visibility: visible;
+	}
+</style>

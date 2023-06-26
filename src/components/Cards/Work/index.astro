@@ -1,0 +1,115 @@
+---
+interface Props {
+	isVisibleOnMount?: boolean;
+}
+
+const { isVisibleOnMount = true } = Astro.props;
+const randomImage = 'url(https://images.prismic.io/meltwater-site/16a49149-5fd1-444a-9ea9-af8474fade27_mw+logo+stacked+padding+transparent.png?auto=compress,format)';
+---
+
+<a class='work-card-container animated-card-work' href='#'>
+	<div class='image-container'/>
+	<div class='content-container'>
+		<div class='top-content'>
+			2020
+		</div>
+		<div class='bottom-content'>
+			meltwater
+		</div>
+	</div>
+</a>
+
+<style define:vars={{
+	backgroundImage: randomImage,
+	opacity: isVisibleOnMount ? 1 : 0,
+	translate: isVisibleOnMount ? 'translateY(0)' : 'translateY(-7px)',
+}}>
+
+	.work-card-container {
+		opacity: var(--opacity);
+		transform: var(--translate);
+		position: relative;
+		border: 1px solid var(--grey);
+		border-radius: var(--size-xl);
+		display: block;
+		width: 25rem;
+		height: 18rem;
+		overflow: hidden;
+		transition: var(--transition-default);
+	}
+
+	.image-container {
+		position: relative;
+		background-image: var(--backgroundImage);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 100%;
+		height: 100%;
+		transition: var(--transition-slow);
+		z-index: 1;
+	}
+	.image-container:after {
+		display: block;
+		content: '';
+		width: 20px;
+		height: 20px;
+		margin: auto;
+		clip-path: circle(25%);
+		background-color: var(--accent);
+		transition: var(--transition-slow);
+		z-index: 1;
+	}
+
+	.content-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		height: 90%;
+		padding: var(--size-md);
+		color: var(--white);
+		text-decoration: none;
+		z-index: 999;
+	}
+	.top-content {
+		font-size: var(--font-large);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+		transition: var(--transition-slow) .1s;
+	}
+	.bottom-content {
+		font-size: var(--font-heading-default);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(10px);
+		transition: var(--transition-slow) .2s;
+	}
+
+	.work-card-container:hover {
+		border: 1px solid var(--white);
+	}
+	.work-card-container:hover .image-container {
+		scale: .94;
+	}
+	.work-card-container:hover .image-container:after {
+		clip-path: circle(50%);
+		width: 200%;
+		height: 200%;
+		left: 0;
+		transform: translateX(-200px) translateY(-30px);
+	}
+	.work-card-container:hover .top-content {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0px);
+	}
+	.work-card-container:hover .bottom-content {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0px);
+	}
+</style>

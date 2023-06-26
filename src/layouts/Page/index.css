@@ -1,0 +1,64 @@
+@font-face {
+	font-family: 'LondonUnderground';
+	src: url('/fonts/london_underground_regular.ttf') format('truetype');
+	font-display: block;
+	font-weight: 400;
+}
+
+@keyframes fadeIn{
+	to { opacity: 1; }
+}
+@keyframes slideIn{
+	to { opacity: 1; transform: translateY(0); }
+}
+
+:root {
+	/* themes */
+	--accent: #e66565;
+	--black: #282828;  
+	--grey: #d4d4d4;
+	--grey-2: #c0c0c0;
+	--white: #F6F6F6;
+	--white-2: #f0f0f0;
+	/* font-sizes */
+	--font-small: 0.8rem;
+	--font-default: 1rem;
+	--font-large: 1.2rem;
+	--font-heading-small: 2rem;
+	--font-heading-default: 3rem;
+	--font-heading-large: 4rem;
+	/* sizes */
+	--size-xxs: .4rem;
+	--size-xs: .6rem;
+	--size-s: .8rem;
+	--size-md: 1rem;
+	--size-lg: 1.2rem;
+	--size-xl: 1.4rem;
+	--size-xxl: 1.6rem;
+	/* transition */
+	--transition-default: .2s;
+	--transition-slow: .4s;
+}
+
+html {
+	font-family: 'LondonUnderground';
+	background-color: #F6F6F6;
+	color: var(--black);
+	font-size: var(--font-default);
+}
+
+body {
+	margin: 0; padding: 0; border: 0;
+}
+
+main {
+	width: 85%;
+	min-height: calc(85vh);
+	margin: var(--size-xxl) auto;
+	padding: var(--size-md);
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-xxl) 0;
+}
+.animated-slideIn { animation: slideIn 0.7s ease-in-out forwards; }
+.animated-fadeIn { animation: fadeIn 0.7s ease-in-out forwards; }

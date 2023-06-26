@@ -1,0 +1,32 @@
+---
+import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
+import WorkCard from '@/components/Cards/Work/index.astro';
+---
+<PagePreviewLayout title='work' pageUrl='#'>
+	<WorkCard isVisibleOnMount={false} />
+	<WorkCard isVisibleOnMount={false} />
+	<WorkCard isVisibleOnMount={false} />
+</PagePreviewLayout>
+
+<script>
+	import { ANIMATION_TYPE, animateElements } from '@/utils/index';
+
+	const target = document.getElementById('preview-section-work');
+	const intersectionOptions = {
+		root: null,
+    rootMargin: '0px',
+    threshold: .5,
+	};
+
+	const handleIntersection = (entries: IntersectionObserverEntry[]) => (
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const cards = document.querySelectorAll('.animated-card-work');
+				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 300 });
+			};
+		})
+	);
+
+	const sectionObserver = new IntersectionObserver(handleIntersection, intersectionOptions);
+	target && sectionObserver.observe(target);
+</script>

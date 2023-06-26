@@ -1,0 +1,44 @@
+---
+const welcomeMessage = 'welcome to my simple personal website and playground';
+const messageWords = welcomeMessage.split(' ');
+---
+
+<h1 class='intro'>
+	{messageWords.map((word) => <span class='word'>{word}</span>)}
+</h1>
+
+<style>
+	.intro {
+		display: inline-flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: var(--size-xl);
+		font-size: var(--font-heading-large);
+		font-weight: 400;
+		padding: 17rem 0 18rem;
+	}
+	.word {
+		opacity: 0;
+		transform: translateY(4px);
+		display: flex;
+		align-items: end;
+	}
+	.intro > span:last-child::after {
+		display: block;
+		content: '';
+		width: 9px;
+		height: 9px;
+		border-radius: 50%;
+		opacity: 0;
+		background-color: var(--accent);
+		transform: translateY(-17px);
+		animation: .3s fadeIn 2.1s ease-in-out forwards;
+	}
+</style>
+
+<script>
+	import { ANIMATION_TYPE, animateElements } from "@/utils/index";
+
+	const words = document.querySelectorAll('.word');
+	animateElements({ targets: words, animationType: ANIMATION_TYPE.SLIDE_IN });
+</script>

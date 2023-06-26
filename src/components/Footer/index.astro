@@ -1,0 +1,47 @@
+---
+import { Icon } from 'astro-icon';
+---
+
+<footer>
+	<div class='me'>
+		hedik
+	</div>
+	<div class='separator'/>
+	<div class='social'>
+		<a href='#' target='_blank' rel='noreferrer noopener'>
+			<Icon name='simple-icons:linkedin' width='16' height='16'/>
+		</a>
+		<a href='#' target='_blank' rel='noreferrer noopener'>
+			<Icon name='simple-icons:github' width='16' height='16'/>
+		</a>
+		<a href='#' target='_blank' rel='noreferrer noopener'>
+			<Icon name='simple-icons:steam' width='16' height='16'/>
+		</a>
+	</div>
+</footer>
+
+<style>
+	footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: var(--white-2);
+		padding: var(--size-s) var(--size-md);
+	}
+
+	.me { font-size: var(--font-small); }
+	.separator:after {
+		display: block;
+		content: '';
+		width: 6px;
+		height: 6px;
+		background-color: var(--accent);
+		border-radius: 50px;
+	}
+	.social {
+		display: flex;
+		align-items: center;
+		gap: 0 var(--size-s);
+	}
+	.social a { color: var(--black); }
+</style>

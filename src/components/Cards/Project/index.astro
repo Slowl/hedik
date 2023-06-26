@@ -1,0 +1,128 @@
+---
+import { Icon } from 'astro-icon';
+
+interface Props {
+	createdAt: Date;
+	description?: string;
+	githubUrl: string;
+	isVisibleOnMount?: boolean;
+	language: string;
+	name: string;
+	websiteUrl?: string;
+}
+
+const {
+	createdAt,
+	description,
+	githubUrl,
+	isVisibleOnMount = true,
+	language,
+	name,
+	websiteUrl,
+} = Astro.props;
+
+const languageIcons: { [key: string]: string } = {
+	html: 'simple-icons:html5',
+	css: 'simple-icons:css3',
+	javascript: 'simple-icons:javascript',
+	typescript: 'simple-icons:typescript',
+	astro: 'simple-icons:astro',
+	react: 'simple-icons:react',
+}
+---
+
+<div class='card-container animated-card-project'>
+	<div class='content-container'>
+		<div class='content-header'>
+			<div class='name'>{name}</div>
+			<div class='created-at'>{new Date(createdAt).toLocaleDateString('fr-FR').split('/').join(' / ')}</div>
+		</div>
+		<div class='description'>{description}</div>
+		<div class='language'>
+			<Icon name={languageIcons[language.toLowerCase()]} width='14' height='14'/>
+			{language}
+		</div>
+	</div>
+	<div class='links-container'>
+		<a href={githubUrl} target='_blank' rel='noreferrer noopener'> 
+			<Icon name='ri:github-fill' width='18' height='18' /> github
+		</a>
+		{websiteUrl && (
+			<a href={websiteUrl} target='_blank' rel='noreferrer noopener'>
+				<Icon name='ri:flashlight-fill' width='18' height='18' /> website
+			</a>
+			<div class='separator' />
+		)}
+	</div>
+</div>
+
+<style define:vars={{
+		opacity: isVisibleOnMount ? 1 : 0,
+		translate: isVisibleOnMount ? 'translateY(0)' : 'translateY(-7px)',
+}}>
+	.card-container {
+		opacity: var(--opacity);
+		transform: var(--translate);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		border: 1px solid var(--grey);
+		border-radius: var(--size-xl);
+		width: 25rem;
+		height: 15rem;
+		overflow: hidden;
+	}
+	.content-container {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-xl);
+		padding: var(--size-lg);
+		text-transform: lowercase;
+	}
+	.content-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: var(--size-md);
+	}
+	.name { font-size: var(--font-large); }
+	.created-at { font-size: var(--font-small); }
+	.description { font-size: var(--font-default); }
+	.language {
+		font-size: var(--font-small);
+		display: flex;
+		align-items: center;
+		gap: var(--size-xxs);
+	}
+	.links-container {
+		display: flex;
+		align-items: center;
+		background-color: var(--white-2);
+	}
+	.separator {
+		display: block;
+		position: absolute;
+		content: '';
+		width: 6px;
+		height: 6px;
+		border-radius: 100px;
+		background-color: var(--accent);
+		margin: 49.3%;
+		transition: var(--transition-default);
+	}
+	.links-container a {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-xs);
+		width: 100%;
+		padding: var(--size-xs) var(--size-md);
+		font-size: var(--font-small);
+		color: var(--black);
+		text-decoration: none;
+	}
+	.links-container a:first-child:hover ~ .separator { transform: translateX(-25px); }
+	.links-container a:nth-child(2):hover ~ .separator { transform: translateX(25px); }	
+</style>

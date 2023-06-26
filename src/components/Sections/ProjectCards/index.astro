@@ -1,0 +1,57 @@
+---
+import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
+import ProjectCard from '@/components/Cards/Project/index.astro';
+import { githubReposUrl } from '@/datas/github';
+import { useFetch } from '@/utils/index';
+
+interface Repository {
+	created_at: Date;
+	description?: string;
+	homepage?: string;
+	html_url: string;
+	id: number;
+	language: string;
+	name: string
+	updated_at: Date;
+	[key: string]: any;
+}
+const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=3' })
+const repositories: Repository[] | null = request.data;
+---
+<PagePreviewLayout title='projects' pageUrl='#'>
+	{repositories && repositories.map((repository) => (
+		<ProjectCard
+			createdAt={repository.created_at}
+			description={repository.description}
+			name={repository.name}
+			githubUrl={repository.html_url}
+			isVisibleOnMount={false}
+			language={repository.language}
+			name={repository.name}
+			websiteUrl={repository.homepage}
+		/>
+	))}
+</PagePreviewLayout>
+
+<script>
+	import { ANIMATION_TYPE, animateElements } from '@/utils/index';
+
+	const target = document.getElementById('preview-section-projects');
+	const intersectionOptions = {
+		root: null,
+    rootMargin: '0px',
+    threshold: .5,
+	};
+
+	const handleIntersection = (entries: IntersectionObserverEntry[]) => (
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const cards = document.querySelectorAll('.animated-card-project');
+				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 300 });
+			};
+		})
+	);
+
+	const sectionObserver = new IntersectionObserver(handleIntersection, intersectionOptions);
+	target && sectionObserver.observe(target);
+</script>
