@@ -17,24 +17,24 @@ const { title, pageUrl } = Astro.props;
 		<div class='cards-container'>
 			<slot />
 		</div>
-		<a class='see-more' href={pageUrl}>
-			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
-		</a>
 	</div>
+	<a class='see-more' href={pageUrl}>
+		<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+	</a>
 </section>
 
 <style>
 	.preview-section {
 		display: flex;
 		align-items: center;
-		padding: 5rem 0 15rem;
+		padding: 5rem 0 8rem;
 	}
 	.section-title {
 		font-size: var(--font-heading-default);
 		font-weight: 400;
 		text-orientation: mixed;
 		writing-mode: vertical-lr;
-		transform: rotate(180deg) translateX(110px);
+		transform: rotate(180deg);
 	}
 	.section-title:before {
 		content: '';
@@ -48,15 +48,14 @@ const { title, pageUrl } = Astro.props;
 	}
 	.section-content {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
-		width: 100%;
-		margin-left: -95px;
+		width: 80%;
 	}
 	.cards-container {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--size-md);
+		gap: var(--size-xl);
 	}
 	.see-more {
 		display: flex;

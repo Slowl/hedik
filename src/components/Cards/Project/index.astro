@@ -35,7 +35,9 @@ const languageIcons: { [key: string]: string } = {
 	<div class='content-container'>
 		<div class='content-header'>
 			<div class='name'>{name}</div>
-			<div class='created-at'>{new Date(createdAt).toLocaleDateString('fr-FR').split('/').join(' / ')}</div>
+			<div class='created-at'>
+				{new Date(createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' }).split('/').join(' / ')}
+			</div>
 		</div>
 		<div class='description'>{description}</div>
 		<div class='language'>
@@ -69,7 +71,7 @@ const languageIcons: { [key: string]: string } = {
 		justify-content: space-between;
 		border: 1px solid var(--grey);
 		border-radius: var(--size-xl);
-		width: 25rem;
+		width: 20rem;
 		height: 15rem;
 		overflow: hidden;
 	}
@@ -123,6 +125,6 @@ const languageIcons: { [key: string]: string } = {
 		color: var(--black);
 		text-decoration: none;
 	}
-	.links-container a:first-child:hover ~ .separator { transform: translateX(-25px); }
-	.links-container a:nth-child(2):hover ~ .separator { transform: translateX(25px); }	
+	.links-container a:first-child:hover ~ .separator { transform: translateX(-15px); }
+	.links-container a:nth-child(2):hover ~ .separator { transform: translateX(15px); }	
 </style>
