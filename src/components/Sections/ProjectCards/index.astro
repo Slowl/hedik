@@ -47,7 +47,7 @@ const repositories: Repository[] | null = request.data;
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
 				const cards = document.querySelectorAll('.animated-card-project');
-				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 300 });
+				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 200 });
 			};
 		})
 	);

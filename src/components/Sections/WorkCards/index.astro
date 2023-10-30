@@ -22,7 +22,7 @@ import WorkCard from '@/components/Cards/Work/index.astro';
 		entries.forEach((entry) => {
 			if (entry.isIntersecting) {
 				const cards = document.querySelectorAll('.animated-card-work');
-				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 300 });
+				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 200 });
 			};
 		})
 	);

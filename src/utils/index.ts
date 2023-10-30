@@ -48,7 +48,6 @@ export const useFetch = async ({ url, params }: { url: string; params?: string }
 		error = err;
 		throw new Error(`Request failed: ${err}`);
 	} finally {
-
 		return { data, error }
 	}
 }
