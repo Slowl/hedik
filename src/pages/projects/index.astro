@@ -1,0 +1,41 @@
+---
+import { githubReposUrl } from '@/datas/github';
+import PageLayout from '@/layouts/Page/index.astro';
+import ProjectCard from '@/components/Cards/Project/index.astro';
+import { Repository } from '@/types/index';
+import { useFetch } from '@/utils/index';
+
+const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=20' })
+const repositories: Repository[] | null = request.data;
+---
+
+<PageLayout
+	seo={{
+		description: 'This page regroups all the available a publicly visible Github project of HediK aka Slowl',
+		title: 'projects'
+	}}
+	title='projects'
+>
+	<div class='repos-container'>
+		{repositories && repositories.map((repository) => (
+			<ProjectCard
+				createdAt={repository.created_at}
+				description={repository.description}
+				name={repository.name}
+				githubUrl={repository.html_url}
+				language={repository.language}
+				name={repository.name}
+				websiteUrl={repository.homepage}
+			/>
+		))}
+	</div>
+</PageLayout>
+
+<style>
+	.repos-container {
+		display: flex;
+		justify-content: center;
+		gap: var(--size-xxl) var(--size-xl);
+		flex-wrap: wrap;
+	}
+</style>

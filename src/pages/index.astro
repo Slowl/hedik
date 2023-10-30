@@ -5,7 +5,12 @@ import SectionWorkCards from '@/components/Sections/WorkCards/index.astro';
 import SectionProjectCards from '@/components/Sections/ProjectCards/index.astro';
 ---
 
-<PageLayout title='Welcome to Astro.' description='bonjour'>
+<PageLayout
+	seo={{
+		title: 'welcome',
+		description: 'Welcome page of Hedik Portfolio and personnal playground, to discover his work and shit'
+	}}
+>
 	<section>
 		<Welcome />
 	</section>

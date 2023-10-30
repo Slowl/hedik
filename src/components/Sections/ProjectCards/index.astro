@@ -2,23 +2,13 @@
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import ProjectCard from '@/components/Cards/Project/index.astro';
 import { githubReposUrl } from '@/datas/github';
+import { Repository } from '@/types/index';
 import { useFetch } from '@/utils/index';
 
-interface Repository {
-	created_at: Date;
-	description?: string;
-	homepage?: string;
-	html_url: string;
-	id: number;
-	language: string;
-	name: string
-	updated_at: Date;
-	[key: string]: any;
-}
 const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=3' })
 const repositories: Repository[] | null = request.data;
 ---
-<PagePreviewLayout title='projects' pageUrl='#'>
+<PagePreviewLayout title='projects' pageUrl='/projects'>
 	{repositories && repositories.map((repository) => (
 		<ProjectCard
 			createdAt={repository.created_at}

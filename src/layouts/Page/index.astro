@@ -4,18 +4,21 @@ import Navbar from '@/components/Navbar/index.astro';
 import Footer from '@/components/Footer/index.astro';
 
 export interface Props {
-	description: string;
-	title: string;
+	seo: {
+		title: string;
+		description: string;
+	}
+	title?: string;
 }
 
-const { description, title } = Astro.props;
+const { seo, title } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>{title}</title>
-		<meta name='description' content={description}>
+		<title>hedik - {seo.title}</title>
+		<meta name='description' content={seo.description}>
 		<meta charset='UTF-8' />
 		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<meta name='theme-color' content='#fff'>
@@ -24,6 +27,12 @@ const { description, title } = Astro.props;
 	</head>
 	<body>
 		<Navbar />
+		{title && (
+			<div class='presentation-title'>
+				<div class='dots'>.....</div>
+				{title}
+			</div>
+		)}
 		<main>
 			<slot />
 		</main>

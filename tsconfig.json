@@ -24,6 +24,7 @@
 		"declaration": true,
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
+		"importsNotUsedAsValues": "preserve",
 		"allowJs": false,
 		"skipLibCheck": true,
     "baseUrl": ".",
@@ -31,6 +32,7 @@
 			"@/datas/*": ["src/datas/*"],
       "@/components/*": ["src/components/*"],
 			"@/layouts/*": ["src/layouts/*"],
+			"@/types/*": ["src/types/*"],
 			"@/utils/*": ["src/utils/*"],
     }
   },
