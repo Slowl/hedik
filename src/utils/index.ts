@@ -1,3 +1,6 @@
+import { sanityClient } from '@/data/sanity';
+import imageUrlBuilder from "@sanity/image-url";
+
 /**
  * A throttle function, mainly used inside Navbar component.
  */
@@ -51,3 +54,13 @@ export const useFetch = async ({ url, params }: { url: string; params?: string }
 		return { data, error }
 	}
 }
+
+/**
+ * Utils provided by Sanity to build an image from the CMS.
+ */
+export const imageBuilder = imageUrlBuilder(sanityClient);
+
+/**
+ * Function to extract the url from the image built by Sanity's utils.
+ */
+export const urlForImage = (source: string) => imageBuilder.image(source);

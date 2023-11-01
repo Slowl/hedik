@@ -1,0 +1,29 @@
+---
+import { sanityClient } from '@/data/sanity';
+import type { Work } from '@/types/index';
+import PortableText from '@/components/PortableText/index.astro';
+import { urlForImage } from '@/utils/index';
+
+export const getStaticPaths = async () => {
+	const works = await sanityClient.fetch(`*[_type == "work"]`);
+
+	return works.map((work: Work) => ({
+			params: { slug: work.slug.current },
+			props: { work },
+		}
+	));
+};
+
+const { work }: {
+	work: Work
+} = Astro.props;
+---
+
+<h1>future page for the {work.name} company</h1>
+<div>{work.description}</div>
+<PortableText value={work.description} />
+<img src={urlForImage(work.logo).url()} />
+
+<script define:vars={{ work }}>
+	console.log(work.name, work)
+</script>

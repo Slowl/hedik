@@ -1,8 +1,8 @@
 ---
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import ProjectCard from '@/components/Cards/Project/index.astro';
-import { githubReposUrl } from '@/datas/github';
-import { Repository } from '@/types/index';
+import { githubReposUrl } from '@/data/github';
+import type { Repository } from '@/types/index';
 import { useFetch } from '@/utils/index';
 
 const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=3' })
