@@ -2,13 +2,13 @@
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import WorkCard from '@/components/Cards/Work/index.astro';
 import { sanityClient } from '@/data/sanity';
-import type { Work } from '@/types/index';
+import type { DataWork } from '@/types/index';
 import { urlForImage } from '@/utils/index';
 
 const works = await sanityClient.fetch(`*[_type == "work"][0..3] | order(builtAt desc)`);
 ---
 <PagePreviewLayout title='work' pageUrl='/works' quantity={works.length ?? 0}>
-	{works.slice(0, 3).map((work: Work) => (
+	{works.slice(0, 3).map((work: DataWork) => (
 		<WorkCard
 			builtAt={work.builtAt}
 			isVisibleOnMount={false}

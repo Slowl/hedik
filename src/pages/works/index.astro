@@ -1,7 +1,7 @@
 ---
 import PageLayout from '@/layouts/Page/index.astro';
 import WorkCard from '@/components/Cards/Work/index.astro';
-import type { Work } from '@/types/index';
+import type { DataWork } from '@/types/index';
 import { urlForImage } from '@/utils/index';
 import { sanityClient } from '@/data/sanity';
 
@@ -16,7 +16,7 @@ const works = await sanityClient.fetch(`*[_type == "work"] | order(builtAt desc)
 	title='works'
 >
 	<div class='cards-container'>
-		{works && works.map((work: Work) => (
+		{works && works.map((work: DataWork) => (
 			<WorkCard
 				builtAt={work.builtAt}
 				logo={urlForImage(work.logo).url()}

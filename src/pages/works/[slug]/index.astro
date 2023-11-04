@@ -1,13 +1,13 @@
 ---
 import { sanityClient } from '@/data/sanity';
-import type { Work } from '@/types/index';
+import type { DataWork } from '@/types/index';
 import PortableText from '@/components/PortableText/index.astro';
 import { urlForImage } from '@/utils/index';
 
 export const getStaticPaths = async () => {
 	const works = await sanityClient.fetch(`*[_type == "work"]`);
 
-	return works.map((work: Work) => ({
+	return works.map((work: DataWork) => ({
 			params: { slug: work.slug.current },
 			props: { work },
 		}
@@ -15,7 +15,7 @@ export const getStaticPaths = async () => {
 };
 
 const { work }: {
-	work: Work
+	work: DataWork
 } = Astro.props;
 ---
 

@@ -1,7 +1,7 @@
 
 import type { PortableTextBlock, Slug } from 'sanity';
 
-export interface Repository {
+export interface DataRepository {
 	created_at: Date;
 	description?: string;
 	homepage?: string;
@@ -13,7 +13,7 @@ export interface Repository {
 	[key: string]: any;
 }
 
-export interface Work {
+export interface DataWork {
 	builtAt: string;
 	description: PortableTextBlock;
 	gallery?: string[];
@@ -21,4 +21,12 @@ export interface Work {
 	logo: string;
 	name: string;
 	slug: Slug;
+}
+
+export interface DataFooter {
+	socialLinks: {
+		name: string;
+		newTab: boolean;
+		url: string;
+	}[];
 }

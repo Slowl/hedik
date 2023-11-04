@@ -2,11 +2,11 @@
 import { githubReposUrl } from '@/data/github';
 import PageLayout from '@/layouts/Page/index.astro';
 import ProjectCard from '@/components/Cards/Project/index.astro';
-import type { Repository } from '@/types/index';
+import type { DataRepository } from '@/types/index';
 import { useFetch } from '@/utils/index';
 
 const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=30' })
-const repositories: Repository[] | null = request.data;
+const repositories: DataRepository[] | null = request.data;
 ---
 
 <PageLayout
