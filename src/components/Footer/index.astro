@@ -22,11 +22,16 @@ import { Icon } from 'astro-icon';
 
 <style>
 	footer {
+		width: 100vw;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		position: fixed;
+		bottom: 0;
+		box-sizing: border-box;
+		padding: var(--size-md) var(--size-md) var(--size-xs);
 		background-color: var(--white-2);
-		padding: var(--size-md) var(--size-md);
+		box-shadow: -10px -15px 15px -6px var(--white-2);
 	}
 
 	.me { font-size: var(--font-small); }

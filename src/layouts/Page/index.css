@@ -53,7 +53,6 @@ body {
 
 main {
 	width: 85%;
-	min-height: calc(85vh);
 	margin: var(--size-xxl) auto;
 	padding: var(--size-md);
 	display: flex;
@@ -69,7 +68,7 @@ main {
 	font-size: var(--font-heading-small);
 	font-weight: 400;
 	position: fixed;
-	top: 37%;
+	top: 39%;
 	left: var(--size-xxl);
 	text-orientation: mixed;
 	transform: rotate(180deg);

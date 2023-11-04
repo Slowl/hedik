@@ -11,12 +11,12 @@ const repositories: Repository[] | null = request.data;
 
 <PageLayout
 	seo={{
-		description: 'This page regroups all the available a publicly visible Github project of HediK aka Slowl',
+		description: 'This page regroups all the publicly visible Github projects of HediK aka Slowl',
 		title: 'projects'
 	}}
 	title='projects'
 >
-	<div class='repos-container'>
+	<div class='cards-container'>
 		{repositories && repositories.map((repository) => (
 			<ProjectCard
 				createdAt={repository.created_at}
@@ -32,7 +32,7 @@ const repositories: Repository[] | null = request.data;
 </PageLayout>
 
 <style>
-	.repos-container {
+	.cards-container {
 		display: flex;
 		justify-content: center;
 		gap: var(--size-xxl) var(--size-xl);

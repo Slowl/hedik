@@ -14,10 +14,11 @@ export interface Repository {
 }
 
 export interface Work {
-	name: string;
-	slug: Slug;
 	builtAt: string;
+	description: PortableTextBlock;
+	gallery?: string[];
 	language: string[];
 	logo: string;
-	description: PortableTextBlock; 
+	name: string;
+	slug: Slug;
 }

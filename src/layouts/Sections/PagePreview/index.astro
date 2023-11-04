@@ -4,9 +4,10 @@ import Icon from 'astro-icon';
 interface Props {
 	title: string;
 	pageUrl: string;
+	quantity: number;
 }
 
-const { title, pageUrl } = Astro.props;
+const { title, pageUrl, quantity } = Astro.props;
 ---
 
 <section class='preview-section' id={`preview-section-${title}`}>
@@ -18,9 +19,11 @@ const { title, pageUrl } = Astro.props;
 			<slot />
 		</div>
 	</div>
-	<a class='see-more' href={pageUrl}>
-		<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
-	</a>
+	{quantity > 3 && (
+		<a class='see-more' href={pageUrl}>
+			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+		</a>
+	)}
 </section>
 
 <style>

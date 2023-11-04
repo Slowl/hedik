@@ -1,0 +1,37 @@
+---
+import PageLayout from '@/layouts/Page/index.astro';
+import WorkCard from '@/components/Cards/Work/index.astro';
+import type { Work } from '@/types/index';
+import { urlForImage } from '@/utils/index';
+import { sanityClient } from '@/data/sanity';
+
+const works = await sanityClient.fetch(`*[_type == "work"] | order(builtAt desc)`);
+---
+
+<PageLayout
+	seo={{
+		description: 'This page regroups all professional work made by HediK, as a freelancer or not.',
+		title: 'works'
+	}}
+	title='works'
+>
+	<div class='cards-container'>
+		{works && works.map((work: Work) => (
+			<WorkCard
+				builtAt={work.builtAt}
+				logo={urlForImage(work.logo).url()}
+				name={work.name}
+				slug={work.slug}
+			/>
+		))}
+	</div>
+</PageLayout>
+
+<style>
+	.cards-container {
+		display: flex;
+		justify-content: center;
+		gap: var(--size-xxl) var(--size-xl);
+		flex-wrap: wrap;
+	}
+</style>

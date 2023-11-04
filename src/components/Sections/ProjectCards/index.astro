@@ -5,11 +5,11 @@ import { githubReposUrl } from '@/data/github';
 import type { Repository } from '@/types/index';
 import { useFetch } from '@/utils/index';
 
-const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=3' })
+const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=4' })
 const repositories: Repository[] | null = request.data;
 ---
-<PagePreviewLayout title='projects' pageUrl='/projects'>
-	{repositories && repositories.map((repository) => (
+<PagePreviewLayout title='projects' pageUrl='/projects' quantity={repositories?.length ?? 0}>
+	{repositories && repositories.slice(0, 3).map((repository) => (
 		<ProjectCard
 			createdAt={repository.created_at}
 			description={repository.description}

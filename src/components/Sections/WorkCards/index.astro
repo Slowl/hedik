@@ -1,11 +1,22 @@
 ---
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import WorkCard from '@/components/Cards/Work/index.astro';
+import { sanityClient } from '@/data/sanity';
+import type { Work } from '@/types/index';
+import { urlForImage } from '@/utils/index';
+
+const works = await sanityClient.fetch(`*[_type == "work"][0..3] | order(builtAt desc)`);
 ---
-<PagePreviewLayout title='work' pageUrl='#'>
-	<WorkCard isVisibleOnMount={false} />
-	<WorkCard isVisibleOnMount={false} />
-	<WorkCard isVisibleOnMount={false} />
+<PagePreviewLayout title='work' pageUrl='/works' quantity={works.length ?? 0}>
+	{works.slice(0, 3).map((work: Work) => (
+		<WorkCard
+			builtAt={work.builtAt}
+			isVisibleOnMount={false}
+			logo={urlForImage(work.logo).url()}
+			name={work.name}
+			slug={work.slug}
+		/>
+	))}
 </PagePreviewLayout>
 
 <script>

@@ -1,26 +1,37 @@
 ---
+import type { Slug } from 'sanity';
+
 interface Props {
+	builtAt: string;
 	isVisibleOnMount?: boolean;
+	logo: string;
+	name: string;
+	slug: Slug;
 }
 
-const { isVisibleOnMount = true } = Astro.props;
-const randomImage = 'url(https://images.prismic.io/meltwater-site/16a49149-5fd1-444a-9ea9-af8474fade27_mw+logo+stacked+padding+transparent.png?auto=compress,format)';
+const {
+	builtAt,
+	isVisibleOnMount = true,
+	logo,
+	name,
+	slug,
+} = Astro.props;
 ---
 
-<a class='work-card-container animated-card-work' href='#'>
+<a class='work-card-container animated-card-work' href={`/works/${slug.current}`}>
 	<div class='image-container'/>
 	<div class='content-container'>
 		<div class='top-content'>
-			2020
+			{new Date(builtAt).getFullYear()}
 		</div>
 		<div class='bottom-content'>
-			meltwater
+			{name}
 		</div>
 	</div>
 </a>
 
 <style define:vars={{
-	backgroundImage: randomImage,
+	backgroundImage: `url(${logo})`,
 	opacity: isVisibleOnMount ? 1 : 0,
 	translate: isVisibleOnMount ? 'translateY(0)' : 'translateY(-7px)',
 }}>
