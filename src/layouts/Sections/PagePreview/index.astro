@@ -19,7 +19,7 @@ const { title, pageUrl, quantity } = Astro.props;
 			<slot />
 		</div>
 	</div>
-	{quantity > 3 && (
+	{quantity >= 3 && (
 		<a class='see-more' href={pageUrl}>
 			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
 		</a>
@@ -33,11 +33,12 @@ const { title, pageUrl, quantity } = Astro.props;
 		padding: 5rem 0 8rem;
 	}
 	.section-title {
-		font-size: var(--font-heading-default);
+		font-size: var(--font-heading-small);
 		font-weight: 400;
 		text-orientation: mixed;
 		writing-mode: vertical-lr;
 		transform: rotate(180deg);
+		letter-spacing: 10px;
 	}
 	.section-title:before {
 		content: '';

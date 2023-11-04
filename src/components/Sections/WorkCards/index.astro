@@ -7,7 +7,7 @@ import { urlForImage } from '@/utils/index';
 
 const works = await sanityClient.fetch(`*[_type == "work"][0..3] | order(builtAt desc)`);
 ---
-<PagePreviewLayout title='work' pageUrl='/works' quantity={works.length ?? 0}>
+<PagePreviewLayout title='work' pageUrl='/work' quantity={works.length ?? 0}>
 	{works.slice(0, 3).map((work: DataWork) => (
 		<WorkCard
 			builtAt={work.builtAt}

@@ -7,6 +7,7 @@ import { useFetch } from '@/utils/index';
 
 const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=4' })
 const repositories: DataRepository[] | null = request.data;
+console.log(repositories)
 ---
 <PagePreviewLayout title='projects' pageUrl='/projects' quantity={repositories?.length ?? 0}>
 	{repositories && repositories.slice(0, 3).map((repository) => (

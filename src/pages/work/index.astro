@@ -11,9 +11,9 @@ const works = await sanityClient.fetch(`*[_type == "work"] | order(builtAt desc)
 <PageLayout
 	seo={{
 		description: 'This page regroups all professional work made by HediK, as a freelancer or not.',
-		title: 'works'
+		title: 'work'
 	}}
-	title='works'
+	title='work'
 >
 	<div class='cards-container'>
 		{works && works.map((work: DataWork) => (
