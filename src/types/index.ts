@@ -30,3 +30,11 @@ export interface DataFooter {
 		url: string;
 	}[];
 }
+
+export interface DataNavbar {
+	links: {
+		name: string;
+		newTab: boolean;
+		page: string;
+	}[];
+}

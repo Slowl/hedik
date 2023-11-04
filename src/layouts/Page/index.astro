@@ -12,6 +12,7 @@ export interface Props {
 }
 
 const { seo, title } = Astro.props;
+const currentUrl = Astro.url;
 ---
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ const { seo, title } = Astro.props;
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 	</head>
 	<body>
-		<Navbar />
+		<Navbar currentPage={currentUrl.pathname} />
 		{title && (
 			<div class='presentation-title'>
 				<div class='dots'>.....</div>

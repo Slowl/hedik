@@ -1,37 +1,26 @@
 ---
-const navLinks = [
-	{
-		id: undefined,
-		openInNewTab: false,
-		title: 'work',
-		url: '#',
-	},
-	{
-		id: undefined,
-		openInNewTab: false,
-		title: 'projects',
-		url: '#',
-	},
-	{
-		id: undefined,
-		openInNewTab: false,
-		title: 'contact',
-		url: '#',
-	},
-];
+import { sanityClient } from '@/data/sanity';
+import type { DataNavbar } from '@/types/index';
+
+export interface Props {
+	currentPage: string;
+}
+
+const { currentPage } = Astro.props;
+const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`);
 ---
 
 <nav id='navbar'>
 	<div class='left-container' />
 	<div class='right-container'>
-		{navLinks.map((link) => (
+		{dataNavbar.links.map((link) => (
 			<a
-				href={link.url}
-				id={link.id}
-				target={link.openInNewTab ? '_blank' : '_self'}
-				class:list={['nav-link', { 'nav-link-current': false }]}
+				href={link.page}
+				id={link.name}
+				target={link.newTab ? '_blank' : '_self'}
+				class:list={['nav-link', { 'nav-link-current': currentPage === link.page }]}
 			>
-				{link.title}
+				{link.name}
 			</a>
 		))}
 	</div>
@@ -42,6 +31,7 @@ const navLinks = [
 		display: flex;
 		justify-content: space-between;
 		padding: 0 var(--size-s);
+		margin-bottom: 10rem;
 		border-bottom: 1px solid var(--black);
 		border-bottom-style: dotted;
 		position: sticky;
