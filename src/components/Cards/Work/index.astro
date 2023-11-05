@@ -18,7 +18,7 @@ const {
 } = Astro.props;
 ---
 
-<a class='work-card-container animated-card-work' href={`/works/${slug.current}`}>
+<a class='work-card-container animated-card-work' href={`/work/${slug.current}`}>
 	<div class='image-container'/>
 	<div class='content-container'>
 		<div class='top-content'>
@@ -41,7 +41,7 @@ const {
 		transform: var(--translate);
 		position: relative;
 		border: 1px solid var(--grey);
-		border-radius: var(--size-xl);
+		border-radius: var(--size-md);
 		display: block;
 		width: 20rem;
 		height: 18rem;

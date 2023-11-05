@@ -1,6 +1,7 @@
 ---
 import { sanityClient } from '@/data/sanity';
 import type { DataNavbar } from '@/types/index';
+import Logo from '../../../public/logo_hedik_x500.svg?raw';
 
 export interface Props {
 	currentPage: string;
@@ -11,7 +12,11 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 ---
 
 <nav id='navbar'>
-	<div class='left-container' />
+	<div class='left-container'>
+		<a href='/'>
+			<Fragment set:html={Logo} />
+		</a>
+	</div>
 	<div class='right-container'>
 		{dataNavbar.links.map((link) => (
 			<a
@@ -30,7 +35,8 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 	nav {
 		display: flex;
 		justify-content: space-between;
-		padding: 0 var(--size-s);
+		align-items: center;
+		padding: 0 var(--size-xxl);
 		margin-bottom: 10rem;
 		border-bottom: 1px solid var(--black);
 		border-bottom-style: dotted;
@@ -44,16 +50,17 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 	.nav-hidden {
 		transform: translateY(-100%);
 	}
-	
+	.left-container {
+		a { display: block; width: 28px; }
+	}
 	.right-container {
 		display: flex;
 		gap: var(--size-md);
 	}
-
 	.nav-link {
 		color: var(--black);
 		text-decoration: none;
-		padding: var(--size-lg) 0 var(--size-s);
+		padding: var(--size-xl) 0 var(--size-md);
 	}
 	.nav-link::after {
 		display: block;
