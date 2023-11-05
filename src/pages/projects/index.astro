@@ -5,8 +5,13 @@ import ProjectCard from '@/components/Cards/Project/index.astro';
 import type { DataRepository } from '@/types/index';
 import { useFetch } from '@/utils/index';
 
-const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=30' })
-const repositories: DataRepository[] | null = request.data;
+let repositories: DataRepository[] | null;
+try {
+	const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=30' })
+	repositories = request.data;
+} catch {
+	repositories = null;
+}
 ---
 
 <PageLayout

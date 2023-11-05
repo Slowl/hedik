@@ -5,10 +5,15 @@ import { sanityClient } from '@/data/sanity';
 import type { DataWork } from '@/types/index';
 import { urlForImage } from '@/utils/index';
 
-const works = await sanityClient.fetch(`*[_type == "work"][0..3] | order(builtAt desc)`);
+let works: DataWork[] | undefined;
+try {
+	works = await sanityClient.fetch(`*[_type == "work"][0..3] | order(builtAt desc)`);
+} catch {
+	works = undefined;
+}
 ---
-<PagePreviewLayout title='work' pageUrl='/work' quantity={works.length ?? 0}>
-	{works.slice(0, 3).map((work: DataWork) => (
+<PagePreviewLayout title='work' pageUrl='/work' quantity={works?.length ?? 0}>
+	{works?.slice(0, 3).map((work: DataWork) => (
 		<WorkCard
 			builtAt={work.builtAt}
 			isVisibleOnMount={false}

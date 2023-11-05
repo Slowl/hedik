@@ -5,7 +5,12 @@ import type { DataWork } from '@/types/index';
 import { urlForImage } from '@/utils/index';
 import { sanityClient } from '@/data/sanity';
 
-const works = await sanityClient.fetch(`*[_type == "work"] | order(builtAt desc)`);
+let works: DataWork[] | undefined
+try {
+	works = await sanityClient.fetch(`*[_type == "work"] | order(builtAt desc)`);
+} catch {
+	works = undefined;
+}
 ---
 
 <PageLayout

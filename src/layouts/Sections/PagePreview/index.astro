@@ -22,6 +22,8 @@ const { title, pageUrl, quantity } = Astro.props;
 	{quantity >= 3 && (
 		<a class='see-more' href={pageUrl}>
 			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
 		</a>
 	)}
 </section>
@@ -68,6 +70,10 @@ const { title, pageUrl, quantity } = Astro.props;
 		position: relative;
 		color: var(--black);
 		transition: var(--transition-default);
+		margin-left: 2rem;
+		& svg {
+			margin-right: -15px;
+		}
 	}
 	.see-more:after {
 		content: 'see more';
