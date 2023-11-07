@@ -96,7 +96,7 @@ import PageLayout from '@/layouts/Page/index.astro';
 	
 			try {
 				console.log('formData: ', formData)
-				const response = await fetch('netlify/functions/contact', {
+				const response = await fetch('.netlify/functions/contact', {
 					method: 'POST',
 					headers: {
 						Accept: 'application.json',

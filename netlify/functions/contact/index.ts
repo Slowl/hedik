@@ -23,6 +23,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 	};
 
 	try {
+		console.log('sendgrid data', data)
 		await sendGrid.send(data);
 		return {
 			statusCode: 200,
