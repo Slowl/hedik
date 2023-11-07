@@ -64,3 +64,9 @@ export const imageBuilder = imageUrlBuilder(sanityClient);
  * Function to extract the url from the image built by Sanity's utils.
  */
 export const urlForImage = (source: string) => imageBuilder.image(source);
+
+/**
+ * Custom regex to validate an email.
+ */
+const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, 'm');
+export const isEmailValid = (email: string) => emailRegex.test(email);
