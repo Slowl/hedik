@@ -2,7 +2,7 @@
 import sendGrid from '@sendgrid/mail';
 import { Handler, HandlerEvent } from '@netlify/functions';
 const { SENDGRID_API_KEY, RECEIVER_EMAIL, SENDER_EMAIL } = process.env;
-import { sanitize, isFormValid } from '../../../src/utils';
+import { isFormValid } from '../../../src/utils';
 
 export const handler: Handler = async (event: HandlerEvent) => {
 	sendGrid.setApiKey(SENDGRID_API_KEY || '');
@@ -13,13 +13,13 @@ export const handler: Handler = async (event: HandlerEvent) => {
 		to: RECEIVER_EMAIL || '',
 		from: {
 			email: SENDER_EMAIL || '',
-			name: `${sanitize(formData.firstName)} ${sanitize(formData.lastname)}`
+			name: `${formData.firstName} ${formData.lastname}`
 		},
-		subject: `HediK - ${sanitize(formData.subject)}`,
+		subject: `HediK - ${formData.subject}`,
 		html: `
-			<p>From ${sanitize(formData.firstName)} ${sanitize(formData.lastname)} - ${sanitize(formData.email)}</p>
+			<p>From ${formData.firstName} ${formData.lastname} - ${formData.email}</p>
 			<p>Message:</p>
-			${sanitize(formData.message)}
+			${formData.message}
 		`,
 	};
 

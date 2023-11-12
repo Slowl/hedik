@@ -169,6 +169,7 @@
 </style>
 
 <script>
+	import { sanitize } from '@/utils/index';
   const form = document.getElementById('contact-form') as HTMLFormElement;
 	const toast = document.getElementById('toast');
 	let toastTimeout;
@@ -181,11 +182,11 @@
 			const data = event.currentTarget.elements;
 	
 			const formData = {
-				firstname: data.firstname.value,
-				lastname: data.lastname.value,
-				subject: data.subject.value,
-				email: data.email.value,
-				message: data.message.value,
+				firstname: sanitize(data.firstname.value),
+				lastname: sanitize(data.lastname.value),
+				subject: sanitize(data.subject.value),
+				email: sanitize(data.email.value),
+				message: sanitize(data.message.value),
 			};
 	
 			try {
