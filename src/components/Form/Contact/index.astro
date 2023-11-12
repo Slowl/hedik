@@ -1,0 +1,219 @@
+
+<div class='form-container'>
+	<form id='contact-form' method='POST'>
+		<div class='group-container'>
+			<label class='label-container'>
+					<span>firstname</span>
+					<input
+						minlength={2}
+						name='firstname'
+						placeholder='shigeo'
+						required
+						spellcheck={false}
+						type='text'
+					/>
+				</label>
+			<label class='label-container'>
+				<span>lastname</span>
+				<input
+					minlength={2}
+					name='lastname'
+					placeholder='kageyama'
+					required
+					spellcheck={false}
+					type='text'
+				/>
+			</label>
+		</div>
+		<label class='label-container'>
+			<span>email</span>
+			<input
+				name='email'
+				placeholder='shigeo.k@mobmail.jp'
+				required
+				spellcheck={false}
+				type='email'
+			/>
+		</label>
+		<label class='label-container'>
+			<span>subject</span>
+			<input
+				minlength={2}
+				name='subject'
+				placeholder='hi'
+				required
+				spellcheck={true}
+				type='text'
+			/>
+		</label>
+		<label class='label-container'>
+			<span>message</span>
+			<textarea
+				minlength={50}
+				name='message'
+				placeholder='write me anything you want...'
+				required
+				rows='16'
+				spellcheck={true}
+			/>
+		</label>
+		<button class='submit-button' >
+			send
+		</button>
+	</form>
+	<div id='toast' class='toast' />
+</div>
+
+<style>
+	.form-container {
+		width: 50vw;
+		margin: auto;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-xxl);
+		width: 100%;
+	}
+	.group-container {
+		display: flex;
+		gap: var(--size-xxl);
+		& label {
+			width: 100%;
+		}
+	}
+	.label-container {
+		display: flex;
+		flex-direction: column;
+		& span {
+			display: flex;
+			font-size: var(--font-small);
+			padding-bottom: .2rem;
+			&:after {
+				content: '';
+				display: block;
+				background-color: var(--accent);
+				width: 4px;
+				height: 4px;
+				left: 1px;
+				top: -2px;
+				position: relative;
+				border-radius: 50%;
+			}
+		}
+		& input, textarea {
+			font-family: Arial;
+			font-size: var(--font-small);
+			color: var(--black);
+			padding: var(--size-xs) var(--size-xxs);
+			border: 1px solid var(--black);
+			border-radius: 4px;
+			resize: vertical;
+			transition: var(--transition-default);
+			&:focus {
+				border: 1px solid var(--accent);
+				outline: 0;
+			}
+		}
+	}
+	.submit-button {
+		border: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: 'LondonUnderground';
+		background-color: var(--black-4);
+		color: var(--white-2);
+		min-width: 10rem;
+		max-width: 12rem;
+		padding: var(--size-xs);
+		border-radius: 8px;
+		cursor: pointer;
+		letter-spacing: 3px;
+		text-align: center;
+		transition: var(--transition-default);
+		margin-left: 0;
+
+		&:before {
+			content: '';
+			display: block;
+			background-color: var(--accent);
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			transition: var(--transition-default);
+		}
+
+		&:hover {
+			background-color: var(--black);
+			&:before { transform: scale(1.8); };
+		}
+	}
+	.toast {
+		border-radius: 10px;
+		position: fixed;
+		bottom: -45px;
+		left: 0; right: 0;
+		min-width: 20vw;
+		max-width: 25vw;
+		margin: auto;
+		text-align: center;
+		opacity: 0;
+		visibility: hidden;
+		padding: var(--size-s);
+		transition: var(--transition-default);
+		z-index: 999;
+	}
+	.toast-error { background-color: var(--red); color: var(--white) ;bottom: 10px; opacity: 1; visibility: visible; }
+	.toast-valid { background-color: var(--green); bottom: 10px; opacity: 1; visibility: visible; }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+	const toast = document.getElementById('toast');
+	let toastTimeout;
+
+	if (form && toast) {
+		clearTimeout(toastTimeout);
+		const handleFormSubmission = async (event: any) => {
+
+			event.preventDefault();
+			const data = event.currentTarget.elements;
+	
+			const formData = {
+				firstname: data.firstname.value,
+				lastname: data.lastname.value,
+				subject: data.subject.value,
+				email: data.email.value,
+				message: data.message.value,
+			};
+	
+			try {
+				const response = await fetch('/.netlify/functions/contact', {
+					method: 'POST',
+					headers: {
+						Accept: 'application.json',
+						'Content-Type': 'application/json; charset=UTF-8'
+					},
+					body: JSON.stringify(formData),
+					cache: 'default'
+				});
+	
+				if (response.status === 200) {
+					toast.textContent = 'the message was successfully sent! i\'ll get back to you soon.'
+					toast.classList.add('toast-valid');
+					toastTimeout = setTimeout(() => toast.classList.remove('toast-valid'), 4000);
+					form.reset()
+				} else {
+					toast.textContent = 'an error occured! please try again.'
+					toast.classList.add('toast-error');
+					toastTimeout = setTimeout(() => toast.classList.remove('toast-error'), 4000);
+				};
+			} catch (error) {
+				console.log(`request failed. error: ${error}`);
+			};
+		};
+	
+		form.addEventListener('submit', handleFormSubmission, true);
+	}
+</script>

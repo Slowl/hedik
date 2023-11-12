@@ -3,27 +3,23 @@ import { sanityClient } from '@/data/sanity';
 import type { DataNavbar } from '@/types/index';
 import Logo from '../../../public/logo_hedik_x500.svg?raw';
 
-export interface Props {
-	currentPage: string;
-}
-
-const { currentPage } = Astro.props;
 const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`);
 ---
 
 <nav id='navbar'>
 	<div class='left-container'>
-		<a href='/'>
+		<a href='/' title='home'>
 			<Fragment set:html={Logo} />
 		</a>
 	</div>
 	<div class='right-container'>
 		{dataNavbar.links.map((link) => (
 			<a
+				class='nav-link'
 				href={link.page}
 				id={link.name}
 				target={link.newTab ? '_blank' : '_self'}
-				class:list={['nav-link', { 'nav-link-current': currentPage === link.page }]}
+				title={link.name}
 			>
 				{link.name}
 			</a>
@@ -51,7 +47,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		transform: translateY(-100%);
 	}
 	.left-container {
-		a { display: block; width: 28px; }
+		& a { display: block; width: 28px; }
 	}
 	.right-container {
 		display: flex;
@@ -88,7 +84,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 <script>
 	import { throttle } from '@/utils/index';
-
+	//#region HANDLE SCROLL
 	let previousScrollPosition = Math.min(window.scrollY, 0);
 	const scrollDirection = () => {
 			let scrollPosition = window.scrollY;
@@ -104,7 +100,6 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 			return scrollDirection;
 	};
-
 	const handleScroll = () => {
 		const navContainer = document.getElementById('navbar');
 
@@ -112,6 +107,20 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 			? navContainer?.classList.add('nav-hidden')
 			: navContainer?.classList.remove('nav-hidden');
 	};
-	
 	window.addEventListener('scroll', () => throttle(handleScroll, 400));
+	//#endregion
+
+	//#region HANDLE CURRENT PAGE
+	const navLinks: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav-link');
+	const currentBasePage = window.location.pathname.slice(1).split('/')[0];
+
+  navLinks.forEach((link) => {
+		const linkPath = link.href.split('/').at(-1);
+
+    if (currentBasePage === linkPath) {
+      link.classList.add('nav-link-current');
+    };
+  });
+	//#endregion
+	
 </script>

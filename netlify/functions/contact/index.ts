@@ -2,45 +2,58 @@
 import sendGrid from '@sendgrid/mail';
 import { Handler, HandlerEvent } from '@netlify/functions';
 const { SENDGRID_API_KEY, RECEIVER_EMAIL, SENDER_EMAIL } = process.env;
+import { sanitize, isFormValid } from '../../../src/utils';
 
 export const handler: Handler = async (event: HandlerEvent) => {
 	sendGrid.setApiKey(SENDGRID_API_KEY || '');
 	const formData = event.body && JSON.parse(event.body);
+	const formValidity = isFormValid(formData);
 
-
-	// NOTE: THIS IS NOT SECURE. YOU NEED TO SANITIZE THE INPUTS
 	const data = {
 		to: RECEIVER_EMAIL || '',
 		from: {
 			email: SENDER_EMAIL || '',
-			name: formData.lastname
+			name: `${sanitize(formData.firstName)} ${sanitize(formData.lastname)}`
 		},
-		subject: `HediK Contact - ${formData.subject}`,
+		subject: `HediK - ${sanitize(formData.subject)}`,
 		html: `
-			<p>From ${formData.firstname} ${formData.lastname} - ${formData.email}</p>
-			<p>${formData.message}</p>
+			<p>From ${sanitize(formData.firstName)} ${sanitize(formData.lastname)} - ${sanitize(formData.email)}</p>
+			<p>Message:</p>
+			${sanitize(formData.message)}
 		`,
 	};
 
-	try {
-		console.log('sendgrid data', data)
-		await sendGrid.send(data);
+	if (formValidity.isValid) {
+		try {
+			await sendGrid.send(data);
+	
+			return {
+				statusCode: 200,
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					status: 200,
+					response: 'Message sent successfully.',
+				}),
+			};
+		} catch (error) {
+			return {
+				statusCode: error.code,
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					status: error.code,
+					response: `An error occured: ${error.message}`
+				}),
+			};
+		};
+	} else {
 		return {
-			statusCode: 200,
-			headers: {
-				'Content-Type': 'application/json',
-			},
+			statusCode: 400,
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
-				msg: 'Message sent successfully',
+				status: 400,
+				response: 'The message is invalid and was not sent.',
+				errors: formValidity.errors,
 			}),
 		};
-	} catch (err) {
-		return {
-			statusCode: err.code,
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ msg: err.message }),
-		};
-	}
+	};
 };

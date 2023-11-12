@@ -16,8 +16,13 @@
 	/* themes */
 	--accent: #dd2c2c;
 	--black: #131313;  
+	--black-2: #232323;
+	--black-3: #333333;
+	--black-4: #3c3c3c;
+	--green: #74e77e;
 	--grey: #d4d4d4;
 	--grey-2: #c0c0c0;
+	--red: #e56161;
 	--white: #F6F6F6;
 	--white-2: #f0f0f0;
 	/* font-sizes */
@@ -54,10 +59,10 @@ body {
 main {
 	width: 85%;
 	margin: var(--size-xxl) auto;
-	padding: var(--size-md);
+	padding: var(--size-md) var(--size-md) 2.5rem;
 	display: flex;
 	flex-direction: column;
-	gap: var(--size-xxl) 0;
+	gap: 8rem 0;
 }
 
 .presentation-title {

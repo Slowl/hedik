@@ -1,122 +1,14 @@
 ---
-// export const prerender = false;
-
 import PageLayout from '@/layouts/Page/index.astro';
-// import { isEmailValid } from '@/utils/index';
-
-// const errors = {
-// 	firstname: '',
-// 	lastname: '',
-// 	subject: '',
-// 	email: '',
-// 	message: '',
-// };
-
-// if (Astro.request.method === 'POST') {
-// 	try {
-// 		const data = await Astro.request.formData();
-// 		const firstname = data.get('firstname');
-// 		const lastname = data.get('lastname');
-// 		const subject = data.get('subject')
-// 		const email = data.get('email');
-// 		const message = data.get('message');
-// 		if (typeof firstname !== 'string' || firstname.length < 1) {
-// 			errors.firstname += 'Please enter a firstname.';
-// 		}
-// 		if (typeof lastname !== 'string' || lastname.length < 1) {
-// 			errors.lastname += 'Please enter a lastname.';
-// 		}
-// 		if (typeof subject !== 'string' || subject.length < 1) {
-// 			errors.subject += 'Please enter a subject.';
-// 		}
-// 		if (typeof email !== 'string' || !isEmailValid(email)) {
-// 			errors.email += 'Email is not valid. ';
-// 		}
-// 		if (typeof message !== 'string' || message.length < 3) {
-// 			errors.message += 'message must be at least 30 characters. ';
-// 		}
-// 		const hasErrors = Object.values(errors).some(msg => msg)
-//     if (!hasErrors) {
-// 			console.log('message sent !')
-//     }
-// 	} catch (error) {
-// 		if (error instanceof Error) {
-// 			console.error(error.message);
-// 		}
-// 	}
-// }
+import ContactForm from '@/components/Form/Contact/index.astro';
 ---
 <PageLayout
 	seo={{
-		description: 'You can contact me with for anything, ask any question or just have a chat with me!',
+		description: 'You can contact me for anything, ask any question or just have a chat with me!',
 		title: 'contact'
 	}}
+	title='contact'
 >
-	<form id='contact-form' method='POST'>
-		<label>
-			firstname:
-			<input type='text' name='firstname' required />
-		</label>
-		<label>
-			lastname:
-			<input type='text' name='lastname' required />
-		</label>
-		<label>
-			email:
-			<input type='email' name='email' required />
-		</label>
-		<label>
-			subject:
-			<input type='text' name='subject' required />
-		</label>
-		<label>
-			message:
-			<input type='text' name='message' required />
-		</label>
-		<button>submit</button>
-	</form>
+	<ContactForm />
 </PageLayout>
 
-<script>
-  const form = document.getElementById('contact-form');
-	if (form) {
-		const handleFormSubmission = async (event: any) => {
-			// prevent page from reloading
-			event.preventDefault();
-			const data = event.currentTarget.elements;
-	
-			// put into JSON object
-			const formData = {
-				firstname: data.firstname.value,
-				lastname: data.lastname.value,
-				subject: data.subject.value,
-				email: data.email.value,
-				message: data.message.value,
-			};
-	
-			try {
-				console.log('formData: ', formData)
-				const response = await fetch('/.netlify/functions/contact', {
-					method: 'POST',
-					headers: {
-						Accept: 'application.json',
-						'Content-Type': 'application/json; charset=UTF-8'
-					},
-					body: JSON.stringify(formData),
-					cache: 'default'
-				});
-	
-				if (response.status === 200) {
-					console.log('success');
-				} else {
-					console.log('fail');
-				}
-			} catch (e) {
-				console.log('request failed error:' + e);
-			}
-		};
-	
-		// add the submission event listener
-		form.addEventListener('submit', handleFormSubmission, true);
-	}
-</script>

@@ -3,8 +3,8 @@ import Icon from 'astro-icon';
 
 interface Props {
 	title: string;
-	pageUrl: string;
-	quantity: number;
+	pageUrl?: string;
+	quantity?: number;
 }
 
 const { title, pageUrl, quantity } = Astro.props;
@@ -19,20 +19,19 @@ const { title, pageUrl, quantity } = Astro.props;
 			<slot />
 		</div>
 	</div>
-	{quantity >= 3 && (
+	{quantity && quantity >= 3 ? (
 		<a class='see-more' href={pageUrl}>
 			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
-			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
-			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
 		</a>
-	)}
+	) : <a class='see-more' />}
 </section>
 
 <style>
 	.preview-section {
 		display: flex;
 		align-items: center;
-		padding: 5rem 0 8rem;
+		justify-content: space-between;
+		padding: 5rem 0;
 	}
 	.section-title {
 		font-size: var(--font-heading-small);
@@ -61,6 +60,7 @@ const { title, pageUrl, quantity } = Astro.props;
 	.cards-container {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: center;
 		gap: var(--size-xl);
 	}
 	.see-more {
@@ -71,9 +71,6 @@ const { title, pageUrl, quantity } = Astro.props;
 		color: var(--black);
 		transition: var(--transition-default);
 		margin-left: 2rem;
-		& svg {
-			margin-right: -15px;
-		}
 	}
 	.see-more:after {
 		content: 'see more';

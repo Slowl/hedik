@@ -1,8 +1,10 @@
 ---
 import PageLayout from '@/layouts/Page/index.astro';
+import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import Welcome from '@/components/Welcome/index.astro';
 import SectionWorkCards from '@/components/Sections/WorkCards/index.astro';
 import SectionProjectCards from '@/components/Sections/ProjectCards/index.astro';
+import ContactForm from '@/components/Form/Contact/index.astro';
 ---
 
 <PageLayout
@@ -16,4 +18,7 @@ import SectionProjectCards from '@/components/Sections/ProjectCards/index.astro'
 	</section>
 	<SectionWorkCards />
 	<SectionProjectCards />
+	<PagePreviewLayout title='contact'>
+		<ContactForm />
+	</PagePreviewLayout>
 </PageLayout>
