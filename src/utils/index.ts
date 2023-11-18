@@ -14,7 +14,7 @@ export const throttle = (callback: () => void, time = 200) => {
     
     throttlePause = false;
   }, time);
-};
+}
 
 /**
  * Function to animate a list of element with a delay 'cause i'm lazy to learn a lib for it.
@@ -114,18 +114,18 @@ export const isFormValid = (values: Record<string, string>): {
 
 				if (value && value.length < 1) {
 					errors[key] = 'This field is required.';
-				};
+				}
 
 				if (value && value.length < 2) {
 					errors[key] = 'The value cannot be shorter than 2 characters.';
-				};
+				}
 
 				if (key in specialValidation) {
 					const specialValidationItem = specialValidation[key as keyof typeof specialValidation];
 					if (!(specialValidationItem.validator(value))) {
 						errors[key] = specialValidationItem.errorMessage;
-					};
-				};
+					}
+				}
 
 				return errors;
 			},
@@ -135,3 +135,77 @@ export const isFormValid = (values: Record<string, string>): {
 
 		return { isValid: !(formHasError), errors: formErrors };
 };
+
+/**
+ * A dictionnary of icons based on values coming from Sanity data.
+ */
+export const languageIcon = {
+	'javascript': {
+		name: 'javascript',
+		icon: 'simple-icons:javascript'
+	},
+	'typescript': {
+		name: 'typescript',
+		icon: 'simple-icons:typescript'
+	},
+	'html5': {
+		name: 'html5',
+		icon: 'simple-icons:html5'
+	},
+	'css3': {
+		name: 'css3',
+		icon: 'simple-icons:css3'
+	},
+	'reactjs': {
+		name: 'react.js',
+		icon: 'simple-icons:react'
+	},
+	'nextjs': {
+		name: 'next.js',
+		icon: 'simple-icons:nextdotjs'
+	},
+	'astro': {
+		name: 'astro',
+		icon: 'simple-icons:astro'
+	},
+	'nodejs': {
+		name: 'node.js',
+		icon: 'simple-icons:nodedotjs'
+	},
+	'firebase': {
+		name: 'firebase',
+		icon: 'simple-icons:firebase'
+	},
+	'supabase': {
+		name: 'supabase',
+		icon: 'simple-icons:supabase'
+	},
+	'redux': {
+		name: 'redux.js',
+		icon: 'simple-icons:redux'
+	},
+	'zustand': {
+		name: 'zustand',
+		icon: 'noto:bear'
+	},
+	'graphql': {
+		name: 'graphql',
+		icon: 'simple-icons:graphql'
+	},
+	'styled-components': {
+		name: 'styled-components',
+		icon: 'simple-icons:styledcomponents'
+	},
+	'materialui': {
+		name: 'material-ui',
+		icon: 'simple-icons:materialdesign'
+	},
+	'sanity': {
+		name: 'sanity',
+		icon: 'fluent:dismiss-circle-16-regular'
+	},
+	'strapi': {
+		name: 'strapi',
+		icon: 'simple-icons:strapi'
+	},
+}

@@ -13,7 +13,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 		to: RECEIVER_EMAIL || '',
 		from: {
 			email: SENDER_EMAIL || '',
-			name: `${formData.firstName} ${formData.lastname}`
+			name: `${formData.firstname} ${formData.lastname}`
 		},
 		subject: `HediK - ${formData.subject}`,
 		html: `
@@ -55,5 +55,5 @@ export const handler: Handler = async (event: HandlerEvent) => {
 				errors: formValidity.errors,
 			}),
 		};
-	};
+	}
 };

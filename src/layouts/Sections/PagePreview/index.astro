@@ -20,10 +20,10 @@ const { title, pageUrl, quantity } = Astro.props;
 		</div>
 	</div>
 	{quantity && quantity >= 3 ? (
-		<a class='see-more' href={pageUrl}>
+		<a class='see-more' href={pageUrl} title={`see more ${title}`}>
 			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
 		</a>
-	) : <a class='see-more' />}
+	) : <a class='see-more' href='#' title='see more' />}
 </section>
 
 <style>

@@ -2,11 +2,13 @@
 import { sanityClient } from '@/data/sanity';
 import type { DataWork } from '@/types/index';
 import PortableText from '@/components/PortableText/index.astro';
-import { urlForImage } from '@/utils/index';
+import { urlForImage, languageIcon } from '@/utils/index';
+import PageLayout from '@/layouts/Page/index.astro';
+import Button from '@/components/Button/index.astro';
+import Icon from 'astro-icon';
 
 export const getStaticPaths = async () => {
 	const works = await sanityClient.fetch(`*[_type == "work"]`);
-
 	return works.map((work: DataWork) => ({
 			params: { slug: work.slug.current },
 			props: { work },
@@ -19,11 +21,130 @@ const { work }: {
 } = Astro.props;
 ---
 
-<h1>future page for the {work.name} company</h1>
-<div>{work.description}</div>
-<PortableText value={work.description} />
-<img src={urlForImage(work.logo).url()} />
+<PageLayout
+	seo={{
+		description: `This is something i will have to change later related to ${work.name}`,
+		title: work.name
+	}}
+>
+	<div class='work-container'>
+		<div class='visual-cover' />
+		<header class='header-container'>
+			<div class='header-informations'>
+				<div class='project-name'> {work.name} </div>
+				<div> {work.project} </div>
+				<div> created on {new Date(work.builtAt).toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric' })} </div>
+			</div>
+			<div class='company-picture-container' />
+		</header>
+		<div class='language-container'>
+			{work.languages.map((language) => (
+				<div class='language'>
+					<Icon name={languageIcon[language as keyof typeof languageIcon].icon} width='16' height='16' />
+					{languageIcon[language as keyof typeof languageIcon].name}
+				</div>
+			))}
+		</div>
 
-<script define:vars={{ work }}>
-	console.log(work.name, work)
-</script>
+		<div class='content-container'>
+			<PortableText value={work.description}/>
+		</div>
+
+		<div class='button-container'>
+			<Button href={work.url} newTab title='visit' />
+		</div>
+	</div>
+</PageLayout>
+
+<style define:vars={{ backgroundImage: `url(${urlForImage(work.logo).url()})` }}>
+	.work-container {
+		width: 70%;
+		margin: auto;
+	}
+
+	.visual-cover {
+		width: var(--page-desktop-width);
+		height: 120px;
+		position: fixed;
+		top: 0;
+		background-color: var(--white);
+	}
+
+	.header-container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		border: 1px solid var(--grey-2);
+		border-radius: 12px;
+		position: sticky;
+		top: 75px;
+		padding: var(--size-s);
+		background-color: var(--white);
+		z-index: 100;
+	}
+	.header-informations {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-xxs);
+
+		.project-name {
+			font-size: var(--font-large);
+			padding-bottom: var(--size-xs);
+		}
+
+		& div {
+			font-size: var(--font-small);
+		}
+	}
+
+	.company-picture-container {
+		height: 90px;
+		width: 140px;
+		border-radius: 6px;
+		position: relative;
+		background-image: var(--backgroundImage);
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.language-container {
+		background-color: var(--white-4);
+		border: 2px solid var(--white-4);
+		border-radius: 12px;
+		padding: var(--size-s);
+		font-size: var(--font-small);
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		gap: var(--size-lg);
+		position: sticky;
+		margin-top: .6rem;
+		top: 90px;
+		overflow-x: auto;
+		z-index: 99;
+	}
+	.language {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		& svg {
+			transform: translateY(-1px);
+		}
+	}
+
+	.content-container {
+		margin-top: var(--size-lg);
+		padding: var(--size-md);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.button-container {
+		display: flex;
+		justify-content: center;
+		margin-top: var(--size-md);
+		margin-bottom: var(--size-xl);
+	}
+</style>

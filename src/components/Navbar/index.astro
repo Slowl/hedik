@@ -33,7 +33,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 var(--size-xxl);
-		margin-bottom: 10rem;
+		margin-bottom: 8rem;
 		border-bottom: 1px solid var(--black);
 		border-bottom-style: dotted;
 		position: sticky;
@@ -119,7 +119,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
     if (currentBasePage === linkPath) {
       link.classList.add('nav-link-current');
-    };
+    }
   });
 	//#endregion
 	

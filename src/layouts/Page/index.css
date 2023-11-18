@@ -13,6 +13,8 @@
 }
 
 :root {
+	/* global */
+	--page-desktop-width: 85%;
 	/* themes */
 	--accent: #dd2c2c;
 	--black: #131313;  
@@ -22,9 +24,13 @@
 	--green: #74e77e;
 	--grey: #d4d4d4;
 	--grey-2: #c0c0c0;
+	--grey-3: #b6b6b6;
+	--grey-4: #ababab;
 	--red: #e56161;
 	--white: #F6F6F6;
 	--white-2: #f0f0f0;
+	--white-3: #ececec;
+	--white-4: #e8e8e8;
 	/* font-sizes */
 	--font-small: 0.8rem;
 	--font-default: 1rem;
@@ -47,9 +53,10 @@
 
 html {
 	font-family: 'LondonUnderground';
-	background-color: #F6F6F6;
+	background-color: var(--white);
 	color: var(--black);
 	font-size: var(--font-default);
+	text-transform: lowercase;
 }
 
 body {
@@ -57,7 +64,7 @@ body {
 }
 
 main {
-	width: 85%;
+	width: var(--page-desktop-width);
 	margin: var(--size-xxl) auto;
 	padding: var(--size-md) var(--size-md) 2.5rem;
 	display: flex;

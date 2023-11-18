@@ -30,8 +30,8 @@ try {
 	const target = document.getElementById('preview-section-work');
 	const intersectionOptions = {
 		root: null,
-    rootMargin: '0px',
-    threshold: .5,
+		rootMargin: '0px',
+		threshold: .5,
 	};
 
 	const handleIntersection = (entries: IntersectionObserverEntry[]) => (
@@ -39,7 +39,7 @@ try {
 			if (entry.isIntersecting) {
 				const cards = document.querySelectorAll('.animated-card-work');
 				animateElements({ targets: cards, animationType: ANIMATION_TYPE.SLIDE_IN, delay: 200 });
-			};
+			}
 		})
 	);
 

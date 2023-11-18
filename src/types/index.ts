@@ -17,10 +17,12 @@ export interface DataWork {
 	builtAt: string;
 	description: PortableTextBlock;
 	gallery?: string[];
-	language: string[];
+	languages: string[];
 	logo: string;
 	name: string;
+	project: string;
 	slug: Slug;
+	url: string;
 }
 
 export interface DataFooter {

@@ -13,8 +13,8 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 	<div class='separator'/>
 	<div class='social'>
 		{dataFooter.socialLinks.map((socialLink) => (
-			<a href={socialLink.url} target='_blank' rel='noreferrer noopener' title={socialLink.name}>
-				<Icon name={`simple-icons:${socialLink.name}`} width='21' height='21'/>
+			<a href={socialLink.url} title={socialLink.name} target='_blank' rel='noreferrer noopener' title={socialLink.name}>
+				<Icon name={`simple-icons:${socialLink.name}`} width={21} height={21} />
 			</a>
 		))}
 	</div>
@@ -30,7 +30,7 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 		bottom: 0;
 		box-sizing: border-box;
 		padding: var(--size-md) var(--size-md) var(--size-xs);
-		background-color: var(--white-2);
+		background-color: var(--white);
 		box-shadow: -10px -20px 10px -6px var(--white-2);
 	}
 

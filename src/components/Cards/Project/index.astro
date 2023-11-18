@@ -48,12 +48,12 @@ const languageIcons: { [key: string]: string } = {
 		)}
 	</div>
 	<div class='links-container'>
-		<a href={githubUrl} target='_blank' rel='noreferrer noopener'> 
+		<a href={githubUrl} title={`${name} github`} target='_blank' rel='noreferrer noopener'> 
 			<Icon name='ri:github-fill' width='18' height='18' /> github
 		</a>
 		{websiteUrl && (
-			<a href={websiteUrl} target='_blank' rel='noreferrer noopener'>
-				<Icon name='ri:flashlight-fill' width='18' height='18' /> website
+			<a href={websiteUrl} title={`${name} website`} target='_blank' rel='noreferrer noopener'>
+				<Icon name='ri:link-m' width='18' height='18' /> website
 			</a>
 			<div class='separator' />
 		)}
@@ -63,6 +63,7 @@ const languageIcons: { [key: string]: string } = {
 <style define:vars={{
 		opacity: isVisibleOnMount ? 1 : 0,
 		translate: isVisibleOnMount ? 'translateY(0)' : 'translateY(-7px)',
+		linksContainerHoverEffect: websiteUrl ? 'var(--white-3)' : 'var(--white-4)',
 }}>
 	.card-container {
 		opacity: var(--opacity);
@@ -71,7 +72,7 @@ const languageIcons: { [key: string]: string } = {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		border: 1px solid var(--grey);
+		border: 1px solid var(--grey-3);
 		border-radius: var(--size-xl);
 		width: 20rem;
 		height: 15rem;
@@ -108,7 +109,12 @@ const languageIcons: { [key: string]: string } = {
 	.links-container {
 		display: flex;
 		align-items: center;
-		background-color: var(--white-2);
+		background-color: var(--white-3);
+		transition: var(--transition-default);
+		
+		&:hover {
+			background-color: var(--linksContainerHoverEffect);
+		}
 	}
 	.separator {
 		display: block;

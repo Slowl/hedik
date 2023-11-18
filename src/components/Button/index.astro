@@ -1,0 +1,59 @@
+---
+interface Props {
+	href: string;
+	newTab: boolean;
+	title: string;
+}
+
+const {
+	href,
+	newTab,
+	title,
+} = Astro.props;
+---
+
+<a
+	class='submit-button'
+	href={href}
+	target={newTab ? '_blank' : '_self'}
+	rel='noreferrer noopener'
+	title={title}
+>
+	{title}
+</a>
+
+<style>
+	.submit-button {
+		border: 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: 'LondonUnderground';
+		background-color: var(--black-4);
+		color: var(--white-2);
+		min-width: 10rem;
+		max-width: 12rem;
+		padding: var(--size-xs);
+		border-radius: 8px;
+		cursor: pointer;
+		letter-spacing: 3px;
+		text-align: center;
+		text-decoration: none;
+		transition: var(--transition-default);
+		margin-left: 0;
+
+		&:before {
+			content: '';
+			display: block;
+			background-color: var(--accent);
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			transition: var(--transition-default);
+		}
+		&:hover {
+			background-color: var(--black);
+			&:before { transform: scale(1.8); };
+		}
+	}
+</style>
