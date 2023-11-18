@@ -27,6 +27,9 @@ const {
 		<div class='bottom-content'>
 			{name}
 		</div>
+		<div class='bottom-content-mobile'>
+			discover
+		</div>
 	</div>
 </a>
 
@@ -42,17 +45,41 @@ const {
 		position: relative;
 		border: 1px solid var(--grey-3);
 		border-radius: var(--size-md);
+		background-color: var(--white-base);
 		display: block;
 		width: 20rem;
 		height: 18rem;
 		overflow: hidden;
 		transition: var(--transition-default);
+
+		@media screen and (max-width: 425px) {
+			width: 80%;
+			height: 12rem;
+			.image-container:after {
+				display: none;
+			}
+			.content-container { padding: 1rem 0; }
+			.bottom-content { display: none; }
+			.bottom-content-mobile {
+				font-size: var(--font-small);
+				letter-spacing: 2px;
+				display: block;
+				padding: var(--size-s);
+				text-align: center;
+				background-color: var(--white-5);
+				color: var(--black-4);
+				transform: translateY(10px);
+				transition: var(--transition-slow) .2s;
+			}
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+		};
 	}
 
 	.image-container {
 		position: relative;
 		background-image: var(--backgroundImage);
-		background-size: cover;
+		background-size: 70%;
 		background-repeat: no-repeat;
 		background-position: center;
 		width: 100%;
@@ -100,6 +127,7 @@ const {
 		transform: translateY(10px);
 		transition: var(--transition-slow) .2s;
 	}
+	.bottom-content-mobile { display: none; }
 
 	.work-card-container:hover {
 		border: 1px solid var(--white);

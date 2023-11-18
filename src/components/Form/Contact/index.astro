@@ -68,6 +68,16 @@
 	.form-container {
 		width: 50vw;
 		margin: auto;
+
+		@media screen and (max-width: 425px) {
+			width: 80vw;
+			.group-container {
+				flex-direction: column;
+			}
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+			width: 70vw;
+		};
 	}
 	form {
 		display: flex;
@@ -90,7 +100,7 @@
 		& span {
 			display: flex;
 			font-size: var(--font-small);
-			padding-bottom: .2rem;
+			padding-bottom: .3rem;
 			&:after {
 				content: '';
 				display: block;
@@ -104,8 +114,9 @@
 			}
 		}
 		& input, textarea {
+			background-color: white;
 			font-family: Arial;
-			font-size: var(--font-small);
+			font-size: var(--font-default);
 			color: var(--black);
 			padding: var(--size-xs) var(--size-xxs);
 			border: 1px solid var(--black);
@@ -158,8 +169,8 @@
 		position: fixed;
 		bottom: -45px;
 		left: 0; right: 0;
-		min-width: 20vw;
-		max-width: 25vw;
+		min-width: 25vw;
+		max-width: 30vw;
 		margin: auto;
 		text-align: center;
 		font-size: var(--font-small);
@@ -168,6 +179,15 @@
 		padding: var(--size-s);
 		transition: var(--transition-default);
 		z-index: 999;
+
+		@media screen and (max-width: 425px) {
+			min-width: 70vw;
+			max-width: 75vw;
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+			min-width: 60v25
+			max-width: 65v30
+		};
 	}
 	.toast-error { background-color: var(--red); color: var(--white) ;bottom: 10px; opacity: 1; visibility: visible; }
 	.toast-valid { background-color: var(--green); bottom: 10px; opacity: 1; visibility: visible; }

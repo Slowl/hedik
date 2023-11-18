@@ -41,6 +41,23 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		background-color: var(--white);
 		transition: var(--transition-slow);
 		z-index: 999;
+
+		@media screen and (max-width: 425px) {
+			padding: 0 var(--size-s);
+			margin-bottom: 2rem;
+
+			.right-container {
+				gap: var(--size-lg);
+				font-size: var(--font-small);
+			}
+
+			.nav-link:after {
+				width: 5px; height: 5px;
+			}
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+			margin-bottom: 4rem;
+		}
 	}
 
 	.nav-hidden {

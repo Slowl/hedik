@@ -36,7 +36,7 @@ const languageIcons: { [key: string]: string } = {
 		<div class='content-header'>
 			<div class='name'>{name}</div>
 			<div class='created-at'>
-				{new Date(createdAt).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: '2-digit' }).split('/').join(' / ')}
+				{new Date(createdAt).toLocaleDateString('en-EN', { day: '2-digit', month: '2-digit', year: '2-digit' }).split('/').join(' / ')}
 			</div>
 		</div>
 		<div class='description'>{description}</div>
@@ -72,6 +72,7 @@ const languageIcons: { [key: string]: string } = {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		background-color: var(--white-base);
 		border: 1px solid var(--grey-3);
 		border-radius: var(--size-xl);
 		width: 20rem;
@@ -82,6 +83,13 @@ const languageIcons: { [key: string]: string } = {
 		&:hover {
 			transform: translateY(-3px);
 		}
+
+		@media screen and (max-width: 425px) {
+			width: 80%;
+			height: 13rem;
+			.name { font-size: var(--font-default); }
+			.description { font-size: var(--font-small); }
+		};
 	}
 	.content-container {
 		flex-grow: 1;

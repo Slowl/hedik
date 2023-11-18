@@ -31,7 +31,14 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 		box-sizing: border-box;
 		padding: var(--size-md) var(--size-md) var(--size-xs);
 		background-color: var(--white);
-		box-shadow: -10px -20px 10px -6px var(--white-2);
+		box-shadow: -2px -20px 10px -6px var(--white-2);
+
+		@media screen and (max-width: 425px) {
+			.separator:after { display: none; }
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+			.separator:after { position: relative; }
+		};
 	}
 
 	.me { font-size: var(--font-small); }

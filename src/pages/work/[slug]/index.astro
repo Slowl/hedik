@@ -33,7 +33,7 @@ const { work }: {
 			<div class='header-informations'>
 				<div class='project-name'> {work.name} </div>
 				<div> {work.project} </div>
-				<div> created on {new Date(work.builtAt).toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric' })} </div>
+				<div> <span class='created-on'> created on </span> {new Date(work.builtAt).toLocaleDateString('en-EN', { day: 'numeric', month: 'long', year: 'numeric' })} </div>
 			</div>
 			<div class='company-picture-container' />
 		</header>
@@ -60,6 +60,28 @@ const { work }: {
 	.work-container {
 		width: 70%;
 		margin: auto;
+
+		@media screen and (max-width: 425px) {
+			width: 85%;
+
+			.company-picture-container { width: 90px; }
+			.created-on { display: none; }
+			.language-container {
+				padding: var(--size-xxs) var(--size-s);
+				display: flex;
+				align-items: center;
+				justify-content: start;
+				gap: var(--size-s) var(--size-lg);
+			}
+			.language {
+				display: flex;
+				align-items: center;
+				gap: 6px;
+				& svg {
+					transform: translateY(-1px);
+				}
+			}
+		};
 	}
 
 	.visual-cover {
@@ -129,6 +151,7 @@ const { work }: {
 		align-items: center;
 		gap: 6px;
 		& svg {
+			flex-shrink: 0;
 			transform: translateY(-1px);
 		}
 	}
@@ -139,6 +162,7 @@ const { work }: {
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		font-size: var(--font-default);
 	}
 
 	.button-container {

@@ -23,7 +23,7 @@ const { title, pageUrl, quantity } = Astro.props;
 		<a class='see-more' href={pageUrl} title={`see more ${title}`}>
 			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
 		</a>
-	) : <a class='see-more' href='#' title='see more' />}
+	) : <a href='#' title='see more' />}
 </section>
 
 <style>
@@ -32,6 +32,105 @@ const { title, pageUrl, quantity } = Astro.props;
 		align-items: center;
 		justify-content: space-between;
 		padding: 5rem 0;
+
+		@media screen and (max-width: 425px) {
+			flex-direction: column;
+			padding: 1rem 0;
+
+			.section-title {
+				text-orientation: initial;
+				writing-mode: initial;
+				transform: rotate(0deg);
+				letter-spacing: 3px;
+				&:before {
+					transform: translateX(-5px) translateY(45px);
+				}
+			}
+			.section-content {
+				width: 100%;
+				padding: var(--size-xxl) 0;
+			}
+			.see-more {
+				text-decoration: none;
+				color: var(--black);
+				margin-left: 0rem;
+				& svg { width: 0; }
+				&:after {
+					position: relative;
+					left: 0px;
+					opacity: 1;
+					visibility: visible;
+				}
+
+				&:before {
+					display: block;
+					content: '';
+					width: 10px;
+					height: 2px;
+					background-color: var(--accent);
+					margin-right: 5px;
+					border-radius: 10px;
+				}
+
+				&:hover {
+					transform: translateX(-0px);
+					color: var(--black);
+					&:after {
+						color: var(--black);
+						transform: translateX(0px);
+					}
+				}
+			}
+		};
+		@media screen and (min-width: 426px) and (max-width: 1024px) {
+			flex-direction: column;
+			padding: 1rem 0;
+
+			.section-title {
+				text-orientation: initial;
+				writing-mode: initial;
+				transform: rotate(0deg);
+				letter-spacing: 5px;
+				&:before {
+					transform: translateX(-5px) translateY(45px);
+				}
+			}
+			.section-content {
+				width: 100%;
+				padding: var(--size-xxl) 0;
+			}
+			.see-more {
+				text-decoration: none;
+				color: var(--black);
+				margin-left: 0rem;
+				& svg { width: 0; }
+				&:after {
+					position: relative;
+					left: 0px;
+					opacity: 1;
+					visibility: visible;
+				}
+
+				&:before {
+					display: block;
+					content: '';
+					width: 10px;
+					height: 2px;
+					background-color: var(--accent);
+					margin-right: 5px;
+					border-radius: 10px;
+				}
+
+				&:hover {
+					transform: translateX(-0px);
+					color: var(--black);
+					&:after {
+						color: var(--black);
+						transform: translateX(0px);
+					}
+				}
+			}
+		};
 	}
 	.section-title {
 		font-size: var(--font-heading-small);
@@ -58,6 +157,7 @@ const { title, pageUrl, quantity } = Astro.props;
 		width: 80%;
 	}
 	.cards-container {
+		width: 100%;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -84,7 +184,7 @@ const { title, pageUrl, quantity } = Astro.props;
 		transition: var(--transition-default);
 	}
 	.see-more:hover {
-		transform: translate(-10px);
+		transform: translateX(-10px);
 		color: var(--white);
 	}
 	.see-more:hover:after {
