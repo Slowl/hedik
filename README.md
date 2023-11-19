@@ -1,5 +1,5 @@
 <p align='center'>
-  <img width='64' height='64' src='/public/logo_hedik_x64.png'>
+  <img width='64' height='64' src='/public/logo_hedik_x500.svg'>
 </p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/576d3559-e34a-4e57-a640-f4fe4c027860/deploy-status)](https://app.netlify.com/sites/hedik/deploys)

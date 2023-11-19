@@ -7,7 +7,7 @@ const url = urlForImage(asset).url();
 const webpUrl = urlForImage(asset).format('webp').url();
 ---
 
-<picture>
+<picture style='width: 100%'>
 	<source
 		srcset={webpUrl}
 		type='image/webp'
@@ -16,5 +16,6 @@ const webpUrl = urlForImage(asset).format('webp').url();
 		alt={alt}
 		class='responsive__img'
 		src={url}
+		style='width: 100%; border-radius: 6px'
 	/>
 </picture>
