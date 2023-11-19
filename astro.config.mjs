@@ -8,6 +8,9 @@ const {
 } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
 export default defineConfig({
+	prefetch: {
+		prefetchAll: true,
+	},
 	integrations: [
 		sanityIntegration({
 			projectId: VITE_SANITY_STUDIO_PROJECT_ID,

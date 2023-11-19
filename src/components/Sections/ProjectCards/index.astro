@@ -8,6 +8,9 @@ import { useFetch } from '@/utils/index';
 let repositories: DataRepository[] | null;
 try {
 	const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=4' })
+	if (request.data.message) {
+		throw 'api rate limit exceeded'
+	}
 	repositories = request.data;
 } catch {
 	repositories = null;

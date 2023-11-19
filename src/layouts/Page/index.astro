@@ -16,10 +16,10 @@ const { seo, title } = Astro.props;
 <!DOCTYPE html>
 <html lang='en'>
 	<head>
-		<title>hedik - {seo.title}</title>
+		<title>hedik • {seo.title}</title>
 		<meta name='description' content={seo.description}>
 		<meta charset='UTF-8' />
-		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta name='theme-color' content='#fff'>
 		<meta name='generator' content={Astro.generator} />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
@@ -127,8 +127,6 @@ const { seo, title } = Astro.props;
 			width: var(--page-mobile-width);
 			padding: var(--size-md) 0 4rem;
 			gap: 5rem 0;
-		};
-		@media screen and (min-width: 651px) and (max-width: 1024px) {
 		};
 	}
 

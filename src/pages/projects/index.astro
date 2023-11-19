@@ -8,6 +8,9 @@ import { useFetch } from '@/utils/index';
 let repositories: DataRepository[] | null;
 try {
 	const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=30' })
+	if (request.data.message) {
+		throw 'api rate limit exceeded'
+	}
 	repositories = request.data;
 } catch {
 	repositories = null;
@@ -16,7 +19,7 @@ try {
 
 <PageLayout
 	seo={{
-		description: 'This page regroups all the publicly visible Github projects of HediK aka Slowl',
+		description: 'discover all my github open source projects (slowl)',
 		title: 'projects'
 	}}
 	title='projects'
