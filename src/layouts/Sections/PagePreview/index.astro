@@ -33,7 +33,7 @@ const { title, pageUrl, quantity } = Astro.props;
 		justify-content: space-between;
 		padding: 5rem 0;
 
-		@media screen and (max-width: 425px) {
+		@media screen and (max-width: 490px) {
 			flex-direction: column;
 			padding: 1rem 0;
 
@@ -48,7 +48,7 @@ const { title, pageUrl, quantity } = Astro.props;
 			}
 			.section-content {
 				width: 100%;
-				padding: var(--size-xxl) 0;
+				padding: 3rem 0;
 			}
 			.see-more {
 				text-decoration: none;
@@ -60,6 +60,7 @@ const { title, pageUrl, quantity } = Astro.props;
 					left: 0px;
 					opacity: 1;
 					visibility: visible;
+					font-size: var(--font-default);
 				}
 
 				&:before {
@@ -82,7 +83,7 @@ const { title, pageUrl, quantity } = Astro.props;
 				}
 			}
 		};
-		@media screen and (min-width: 426px) and (max-width: 1024px) {
+		@media screen and (min-width: 491px) and (max-width: 1024px) {
 			flex-direction: column;
 			padding: 1rem 0;
 
@@ -109,6 +110,7 @@ const { title, pageUrl, quantity } = Astro.props;
 					left: 0px;
 					opacity: 1;
 					visibility: visible;
+					font-size: var(--font-default);
 				}
 
 				&:before {
