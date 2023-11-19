@@ -38,7 +38,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		border-bottom-style: dotted;
 		position: sticky;
 		top: 0;
-		background-color: var(--white);
+		background-color: var(--white-base);
 		transition: var(--transition-slow);
 		z-index: 999;
 
@@ -48,7 +48,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 			.right-container {
 				gap: var(--size-lg);
-				font-size: var(--font-small);
+				font-size: var(--font-default);
 			}
 
 			.nav-link:after {

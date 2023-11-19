@@ -15,19 +15,20 @@ const messageWords = welcomeMessage.split(' ');
 		gap: var(--size-xl);
 		font-size: var(--font-heading-large);
 		font-weight: 400;
-		padding: 8rem 0 18rem;
+		padding: 8rem 1rem 18rem;
 
 		@media screen and (max-width: 650px) {
-			padding: 6rem 1rem 6rem;
-			font-size: var(--font-heading-small);
-			gap: .7rem 1.2rem;
+			align-content: center;
+			height: 38vh;
+			font-size: var(--font-heading-default);
+			gap: 1rem 1.5rem;
 			& > span {
 				letter-spacing: 2px;
 				&:last-child {
 					&::after {
 						width: 6px !important;
 						height: 6px !important;
-						transform: translateY(-9px) translateX(1px) !important;
+						transform: translateY(-12px) !important;
 					}
 				}
 			}
