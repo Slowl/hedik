@@ -89,7 +89,7 @@ const languageIcons: { [key: string]: string } = {
 			height: 210px;
 			.name { font-size: var(--font-default); }
 			.description {
-				font-size: var(--font-small);
+				font-size: var(--font-default);
 				line-height: 16px;
 			}
 		};
@@ -110,7 +110,11 @@ const languageIcons: { [key: string]: string } = {
 	}
 	.name { font-size: var(--font-large); }
 	.created-at { font-size: var(--font-small); }
-	.description { font-size: var(--font-default); }
+	.description {
+		font-family: 'Sometype Mono', monospace;
+		letter-spacing: -1px;
+		font-size: var(--font-default);
+	}
 	.language {
 		font-size: var(--font-small);
 		display: flex;

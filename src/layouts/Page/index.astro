@@ -40,12 +40,14 @@ const { seo, title } = Astro.props;
 </html>
 
 <style is:global>
+	@import url('https://fonts.googleapis.com/css2?family=Sometype+Mono&display=swap');
 	@font-face {
 		font-family: 'LondonUnderground';
 		src: url('/fonts/london_underground_regular.ttf') format('truetype');
 		font-display: block;
 		font-weight: 400;
 	}
+
 
 	@keyframes fadeIn{
 		to { opacity: 1; }
@@ -71,14 +73,14 @@ const { seo, title } = Astro.props;
 		--grey-4: #ababab;
 		--red: #e56161;
 		--white-base: #fff;
-		--white: #F6F6F6;
+		--white: #fcfcfc;
 		--white-2: #f0f0f0;
 		--white-3: #ececec;
 		--white-4: #e8e8e8;
 		--white-5: #e4e4e4;
 		/* font-sizes */
 		--font-small: 0.8rem;
-		--font-default: 0.9rem;
+		--font-default: 0.95rem;
 		--font-large: 1.2rem;
 		--font-heading-small: 2rem;
 		--font-heading-default: 3rem;

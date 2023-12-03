@@ -123,17 +123,16 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 			? navContainer?.classList.add('nav-hidden')
 			: navContainer?.classList.remove('nav-hidden');
 	};
-	window.addEventListener('scroll', () => throttle(handleScroll, 400));
+	window.addEventListener('scroll', () => throttle(handleScroll, 200));
 	//#endregion
 
 	//#region HANDLE CURRENT PAGE
 	const navLinks: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav-link');
-	const currentBasePage = window.location.pathname.slice(1).split('/')[0];
+	const currentBasePage = window.location.pathname.slice(1).split('/').at(0);
 
   navLinks.forEach((link) => {
-		const linkPath = link.href.split('/').at(-1);
-
-    if (currentBasePage === linkPath) {
+		const currentPage = window.location.pathname.split('/').at(-1)
+    if (currentPage && (currentBasePage === currentPage) && (link.href.includes(currentPage))) {
       link.classList.add('nav-link-current');
     }
   });

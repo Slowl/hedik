@@ -53,12 +53,14 @@ const {
 		transition: var(--transition-default);
 
 		@media screen and (max-width: 650px) {
+			border: 1px solid var(--grey-3) !important;
 			width: 80%;
 			height: 230px;
 			.image-container:after {
 				display: none;
 			}
 			.content-container { padding: 1rem 0; }
+			.top-content { opacity: 0 !important; visibility: hidden !important; }
 			.bottom-content { display: none; }
 			.bottom-content-mobile {
 				font-size: var(--font-default);
