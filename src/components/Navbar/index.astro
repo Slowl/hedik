@@ -68,11 +68,18 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 	.right-container {
 		display: flex;
 		gap: var(--size-xxl);
+		&:hover > .nav-link {
+			opacity: .5;
+			&:hover {
+				opacity: 1;
+			}
+		}
 	}
 	.nav-link {
 		color: var(--black);
 		text-decoration: none;
 		padding: var(--size-xl) 0 var(--size-md);
+		transition: var(--transition-default);
 	}
 	.nav-link::after {
 		display: block;
@@ -128,10 +135,10 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 	//#region HANDLE CURRENT PAGE
 	const navLinks: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav-link');
-	const currentBasePage = window.location.pathname.slice(1).split('/').at(0);
+	const currentBasePage = window.location.pathname.split('/').filter(Boolean).at(0);
 
   navLinks.forEach((link) => {
-		const currentPage = window.location.pathname.split('/').at(-1)
+		const currentPage = window.location.pathname.split('/').filter(Boolean).at(-1)
     if (currentPage && (currentBasePage === currentPage) && (link.href.includes(currentPage))) {
       link.classList.add('nav-link-current');
     }
