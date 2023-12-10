@@ -2,7 +2,7 @@
 <div class='form-container'>
 	<form id='contact-form' method='POST'>
 		<div class='group-container'>
-			<label class='label-container'>
+			<label class='label-container' for='firstname'>
 					<span>first name</span>
 					<input
 						minlength={2}
@@ -13,7 +13,7 @@
 						type='text'
 					/>
 				</label>
-			<label class='label-container'>
+			<label class='label-container' for='lastname'>
 				<span>last name</span>
 				<input
 					minlength={2}
@@ -25,7 +25,7 @@
 				/>
 			</label>
 		</div>
-		<label class='label-container'>
+		<label class='label-container' for='email'>
 			<span>email</span>
 			<input
 				name='email'
@@ -35,7 +35,7 @@
 				type='email'
 			/>
 		</label>
-		<label class='label-container'>
+		<label class='label-container' for='subject'>
 			<span>subject</span>
 			<input
 				minlength={2}
@@ -46,7 +46,7 @@
 				type='text'
 			/>
 		</label>
-		<label class='label-container'>
+		<label class='label-container' for='message'>
 			<span>message</span>
 			<textarea
 				minlength={50}
