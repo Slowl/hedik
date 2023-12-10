@@ -10,15 +10,15 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^3.0.4",
+    "@astrojs/netlify": "^3.1.1",
     "@sanity/astro": "^2.1.4",
-    "@sanity/client": "^6.7.0",
+    "@sanity/client": "^6.9.3",
     "@sanity/image-url": "^1.0.2",
-    "@sendgrid/mail": "^7.7.0",
-    "astro": "^3.5.5",
+    "@sendgrid/mail": "^8.1.0",
+    "astro": "^4.0.3",
     "astro-icon": "^0.8.1",
     "astro-portabletext": "^0.9.6",
-    "sanity": "^3.19.0"
+    "sanity": "^3.21.1"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^6.9.1",

@@ -8,15 +8,18 @@ const {
 } = loadEnv(process.env.NODE_ENV, process.cwd(), '');
 
 export default defineConfig({
-	prefetch: {
-		prefetchAll: true,
+	experimental: {
+		contentCollectionCache: true,
 	},
 	integrations: [
 		sanityIntegration({
 			projectId: VITE_SANITY_STUDIO_PROJECT_ID,
 			dataset: VITE_SANITY_STUDIO_DATASET,
-			apiVersion: '2023-11-01',
+			apiVersion: '2023-12-10',
 			useCdn: false,
 		}),
 	],
+	prefetch: {
+		prefetchAll: true,
+	},
 });
