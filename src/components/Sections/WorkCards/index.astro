@@ -2,8 +2,8 @@
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import WorkCard from '@/components/Cards/Work/index.astro';
 import { sanityClient } from '@/data/sanity';
-import type { DataWork } from '@/types/index';
 import { urlForImage } from '@/utils/index';
+import type { DataWork } from '@/types/index';
 
 let works: DataWork[] | undefined;
 try {

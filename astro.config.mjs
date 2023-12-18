@@ -1,6 +1,6 @@
-import { sanityIntegration } from '@sanity/astro';
-import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
+import { defineConfig } from 'astro/config';
+import { sanityIntegration } from '@sanity/astro';
 
 const {
 	VITE_SANITY_STUDIO_PROJECT_ID,

@@ -2,7 +2,6 @@
 import { urlForImage } from '@/utils/index';
 
 const { asset, alt } = Astro.props.node;
-
 const url = urlForImage(asset).url();
 const webpUrl = urlForImage(asset).format('webp').url();
 ---

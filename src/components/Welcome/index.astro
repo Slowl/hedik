@@ -26,7 +26,7 @@ const messageWords = welcomeMessage.split(' ');
 			& > span {
 				letter-spacing: 2px;
 				&:last-child {
-					&::after {
+					&:after {
 						width: 6px !important;
 						height: 6px !important;
 						transform: translateY(-12px) !important;
@@ -35,12 +35,14 @@ const messageWords = welcomeMessage.split(' ');
 			}
 		};
 	}
+
 	.word {
 		opacity: 0;
 		transform: translateY(4px);
 		display: flex;
 		align-items: end;
 	}
+
 	.intro > span:last-child::after {
 		display: block;
 		content: '';

@@ -19,11 +19,14 @@ const { title, pageUrl, quantity } = Astro.props;
 			<slot />
 		</div>
 	</div>
-	{quantity && quantity >= 3 ? (
-		<a class='see-more' href={pageUrl} title={`see more ${title}`}>
-			<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
-		</a>
-	) : <div title='placeholder' />}
+	{(quantity && (quantity >= 3))
+		? (
+			<a class='see-more' href={pageUrl} title={`see more ${title}`}>
+				<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+			</a>
+		)
+		: <div title='placeholder' />
+	}
 </section>
 
 <style>
@@ -46,10 +49,12 @@ const { title, pageUrl, quantity } = Astro.props;
 					transform: translateX(-5px) translateY(45px);
 				}
 			}
+
 			.section-content {
 				width: 100%;
 				padding: 3rem 0;
 			}
+
 			.see-more {
 				text-decoration: none;
 				color: var(--black);
@@ -62,7 +67,6 @@ const { title, pageUrl, quantity } = Astro.props;
 					visibility: visible;
 					font-size: var(--font-default);
 				}
-
 				&:before {
 					display: block;
 					content: '';
@@ -72,7 +76,6 @@ const { title, pageUrl, quantity } = Astro.props;
 					margin-right: 5px;
 					border-radius: 10px;
 				}
-
 				&:hover {
 					transform: translateX(-0px);
 					color: var(--black);
@@ -96,10 +99,12 @@ const { title, pageUrl, quantity } = Astro.props;
 					transform: translateX(-5px) translateY(45px);
 				}
 			}
+
 			.section-content {
 				width: 100%;
 				padding: var(--size-xxl) 0;
 			}
+
 			.see-more {
 				text-decoration: none;
 				color: var(--black);
@@ -112,7 +117,6 @@ const { title, pageUrl, quantity } = Astro.props;
 					visibility: visible;
 					font-size: var(--font-default);
 				}
-
 				&:before {
 					display: block;
 					content: '';
@@ -122,7 +126,6 @@ const { title, pageUrl, quantity } = Astro.props;
 					margin-right: 5px;
 					border-radius: 10px;
 				}
-
 				&:hover {
 					transform: translateX(-0px);
 					color: var(--black);
@@ -134,6 +137,7 @@ const { title, pageUrl, quantity } = Astro.props;
 			}
 		};
 	}
+
 	.section-title {
 		font-size: var(--font-heading-small);
 		font-weight: 400;
@@ -152,12 +156,14 @@ const { title, pageUrl, quantity } = Astro.props;
 		background-color: var(--accent);
 		transform: translateX(-5px);
 	}
+
 	.section-content {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 80%;
 	}
+
 	.cards-container {
 		width: 100%;
 		display: flex;
@@ -165,6 +171,7 @@ const { title, pageUrl, quantity } = Astro.props;
 		justify-content: center;
 		gap: var(--size-xl);
 	}
+
 	.see-more {
 		display: flex;
 		align-items: center;
@@ -173,26 +180,26 @@ const { title, pageUrl, quantity } = Astro.props;
 		color: var(--black);
 		transition: var(--transition-default);
 		margin-left: 2rem;
-	}
-	.see-more:after {
-		content: 'see more';
-		display: block;
-		position: absolute;
-		left: 15px;
-		font-size: var(--font-small);
-		white-space:nowrap;
-		opacity: 0;
-		visibility: hidden;
-		transition: var(--transition-default);
-	}
-	.see-more:hover {
-		transform: translateX(-10px);
-		color: var(--white);
-	}
-	.see-more:hover:after {
-		transform: translateX(-10px);
-		color: var(--black);
-		opacity: 1;
-		visibility: visible;
+		&:after {
+			content: 'see more';
+			display: block;
+			position: absolute;
+			left: 15px;
+			font-size: var(--font-small);
+			white-space:nowrap;
+			opacity: 0;
+			visibility: hidden;
+			transition: var(--transition-default);
+		}
+		&:hover {
+			transform: translateX(-10px);
+			color: var(--white);
+			&:after {
+				transform: translateX(-10px);
+				color: var(--black);
+				opacity: 1;
+				visibility: visible;
+			}
+		}
 	}
 </style>

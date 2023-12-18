@@ -48,7 +48,6 @@ const { seo, title } = Astro.props;
 		font-weight: 400;
 	}
 
-
 	@keyframes fadeIn{
 		to { opacity: 1; }
 	}
@@ -104,18 +103,9 @@ const { seo, title } = Astro.props;
 		color: var(--black);
 		font-size: var(--font-default);
 		text-transform: lowercase;
-
-		@media screen and (max-width: 650px) {
-		};
-		@media screen and (min-width: 651px) and (max-width: 1024px) {
-		};
-		@media screen and (min-width: 1025px) {
-		};
 	}
 
-	body {
-		margin: 0; padding: 0; border: 0;
-	}
+	body { margin: 0; padding: 0; border: 0; }
 
 	main {
 		width: var(--page-desktop-width);
@@ -187,6 +177,7 @@ const { seo, title } = Astro.props;
 			}
 		};
 	}
+
 	.animated-slideIn { animation: slideIn 0.7s ease-in-out forwards; }
 	.animated-fadeIn { animation: fadeIn 0.7s ease-in-out forwards; }
 </style>

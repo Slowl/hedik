@@ -1,10 +1,12 @@
+
 import { sanityClient } from '@/data/sanity';
 import imageUrlBuilder from '@sanity/image-url';
 
+//#region THROTTLE FUNCTION
+let throttlePause: boolean;
 /**
  * A throttle function, mainly used inside Navbar component.
  */
-let throttlePause: boolean;
 export const throttle = (callback: () => void, time = 200) => {
   if (throttlePause) return;
   throttlePause = true;
@@ -14,15 +16,17 @@ export const throttle = (callback: () => void, time = 200) => {
     
     throttlePause = false;
   }, time);
-}
+};
+//#endregion
 
-/**
- * Function to animate a list of element with a delay 'cause i'm lazy to learn a lib for it.
- */
+//#region ANIMATE ELEMENTS
 export enum ANIMATION_TYPE {
 	SLIDE_IN = 'slideIn',
 	FADE_IN = 'fadeIn',
 };
+/**
+ * Function to animate a list of elements with a delay, usefull when used with Intersection Observer API.
+ */
 export const animateElements = ({ targets, animationType, delay = 180 }: {
 	targets: NodeListOf<Element>;
 	animationType: ANIMATION_TYPE;
@@ -35,9 +39,11 @@ export const animateElements = ({ targets, animationType, delay = 180 }: {
 
 	targets.forEach((card, index) => setTimeout(() => card.classList.add(animations[animationType]), delay * index));
 };
+//#endregion
 
+//#region FETCH FUNCTION
 /**
- * Custom data fetching function, it's hard to not think about you React, love u.
+ * Custom data fetching function, using the Fetch API.
  */
 export const useFetch = async ({ url, params }: { url: string; params?: string }) => {
 	
@@ -45,16 +51,18 @@ export const useFetch = async ({ url, params }: { url: string; params?: string }
 	let error = null;
 
 	try {
-		const response = await fetch(`${url}${params}`);
+		const response = await fetch(`${url}${params ? `?${params}` : ''}`);
 		data = await response.json();
-	} catch(err) {
-		error = err;
-		throw new Error(`Request failed: ${err}`);
+	} catch(e) {
+		error = e;
+		throw new Error(`Request failed: ${error}`);
 	} finally {
 		return { data, error };
 	};
 };
+//#endregion
 
+//#region SANITY UTILS
 /**
  * Utils provided by Sanity to build an image from the CMS.
  */
@@ -64,9 +72,11 @@ export const imageBuilder = imageUrlBuilder(sanityClient);
  * Function to extract the url from the image built by Sanity's utils.
  */
 export const urlForImage = (source: string) => imageBuilder.image(source);
+//#endregion
 
+//#region SANITIZER FUNCTION
 /**
- * Helper function to sanitize values sent from clients, thanks SO.
+ * Function to sanitize user's texts sent from clients.
  */
 export const sanitize = (value: string) => {
   const map: { [key: string]: string } = {
@@ -83,15 +93,17 @@ export const sanitize = (value: string) => {
 
   return value.replace(regexRule, (match) => map[match]!);
 };
+//#endregion 
 
+//#region FORM VALIDATOR
 /**
- * Custom regex to validate an email.
+ * Function to validate an email.
  */
 const emailRegex = new RegExp(/^[A-Za-z0-9_!#$%&'*+\/=?`{|}~^.-]+@[A-Za-z0-9.-]+$/, 'm');
 export const isEmailValid = (email: string) => emailRegex.test(email);
 
 /**
- * Custom generic form validator, no idea if i'll re-use it but it's fun.
+ * Custom generic form validator function, built to be reused for any forms.
  */
 export const isFormValid = (values: Record<string, string>): {
 	isValid: boolean,
@@ -135,11 +147,13 @@ export const isFormValid = (values: Record<string, string>): {
 
 		return { isValid: !(formHasError), errors: formErrors };
 };
+//#endregion 
 
+//#region CONSTANTS
 /**
  * A dictionnary of icons based on values coming from Sanity data.
  */
-export const languageIcon = {
+export const languageIcon: { [key: string]: { name: string; icon: string; } } = {
 	'javascript': {
 		name: 'javascript',
 		icon: 'simple-icons:javascript'
@@ -208,4 +222,9 @@ export const languageIcon = {
 		name: 'strapi',
 		icon: 'simple-icons:strapi'
 	},
-}
+	'shell': {
+		name: 'shell',
+		icon: 'simple-icons:powershell'
+	},
+};
+//#endregion

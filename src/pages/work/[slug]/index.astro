@@ -1,10 +1,10 @@
 ---
-import { sanityClient } from '@/data/sanity';
-import type { DataWork } from '@/types/index';
-import PortableText from '@/components/PortableText/index.astro';
-import { urlForImage, languageIcon } from '@/utils/index';
 import PageLayout from '@/layouts/Page/index.astro';
 import Button from '@/components/Button/index.astro';
+import PortableText from '@/components/PortableText/index.astro';
+import { sanityClient } from '@/data/sanity';
+import type { DataWork } from '@/types/index';
+import { urlForImage, languageIcon } from '@/utils/index';
 import Icon from 'astro-icon';
 
 export const getStaticPaths = async () => {
@@ -40,8 +40,8 @@ const { work }: {
 		<div class='language-container'>
 			{work.languages.map((language) => (
 				<div class='language'>
-					<Icon name={languageIcon[language as keyof typeof languageIcon].icon} width='16' height='16' />
-					{languageIcon[language as keyof typeof languageIcon].name}
+					<Icon name={languageIcon[language]?.icon} width='16' height='16' />
+					{languageIcon[language]?.name}
 				</div>
 			))}
 		</div>
@@ -63,7 +63,6 @@ const { work }: {
 
 		@media screen and (max-width: 650px) {
 			width: 85%;
-
 			.company-picture-container { width: 110px; }
 			.created-on { display: none; }
 			.language-container {
@@ -104,16 +103,15 @@ const { work }: {
 		padding: var(--size-s);
 		z-index: 100;
 	}
+
 	.header-informations {
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-xxs);
-
 		.project-name {
 			font-size: var(--font-large);
 			padding-bottom: var(--size-xs);
 		}
-
 		& div {
 			font-size: var(--font-small);
 		}
@@ -146,6 +144,7 @@ const { work }: {
 		overflow-x: auto;
 		z-index: 99;
 	}
+
 	.language {
 		display: flex;
 		align-items: center;

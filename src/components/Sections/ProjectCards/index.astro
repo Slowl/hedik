@@ -1,15 +1,15 @@
 ---
 import PagePreviewLayout from '@/layouts/Sections/PagePreview/index.astro';
 import ProjectCard from '@/components/Cards/Project/index.astro';
+import { useFetch } from '@/utils/index';
 import { githubReposUrl } from '@/data/github';
 import type { DataRepository } from '@/types/index';
-import { useFetch } from '@/utils/index';
 
 let repositories: DataRepository[] | null;
 try {
-	const request = await useFetch({ url: githubReposUrl, params: '?sort=created&direction=desc&per_page=4' })
+	const request = await useFetch({ url: githubReposUrl, params: 'sort=created&direction=desc&per_page=4' });
 	if (request.data.message) {
-		throw 'api rate limit exceeded'
+		throw 'api rate limit exceeded';
 	}
 	repositories = request.data;
 } catch {

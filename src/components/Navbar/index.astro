@@ -1,7 +1,7 @@
 ---
 import { sanityClient } from '@/data/sanity';
 import type { DataNavbar } from '@/types/index';
-import Logo from '../../../public/logo_hedik_x500.svg?raw';
+import LogoSvg from '../../../public/logo_hedik_x500.svg?raw';
 
 const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`);
 ---
@@ -9,7 +9,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 <nav id='navbar'>
 	<div class='left-container'>
 		<a href='/' title='home'>
-			<Fragment set:html={Logo} />
+			<Fragment set:html={LogoSvg} />
 		</a>
 	</div>
 	<div class='right-container'>
@@ -45,11 +45,9 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		@media screen and (max-width: 650px) {
 			padding: 0 var(--size-s);
 			margin-bottom: 2rem;
-
 			.right-container {
 				gap: var(--size-lg);
 			}
-
 			.nav-link:after {
 				width: 5px; height: 5px;
 			}
@@ -62,9 +60,11 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 	.nav-hidden {
 		transform: translateY(-100%);
 	}
+
 	.left-container {
 		& a { display: block; width: 28px; }
 	}
+
 	.right-container {
 		display: flex;
 		gap: var(--size-xxl);
@@ -75,6 +75,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 			}
 		}
 	}
+
 	.nav-link {
 		color: var(--black);
 		text-decoration: none;
@@ -110,18 +111,18 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 	//#region HANDLE SCROLL
 	let previousScrollPosition = Math.min(window.scrollY, 0);
 	const scrollDirection = () => {
-			let scrollPosition = window.scrollY;
-			let scrollDirection: 'down' | 'up' | undefined = undefined;
+		let scrollPosition = window.scrollY;
+		let scrollDirection: 'down' | 'up' | undefined = undefined;
 
-			(scrollPosition <= 0)
-				? scrollDirection = 'up'
-				: (scrollPosition > previousScrollPosition)
-					? scrollDirection = 'down'
-					: scrollDirection = 'up';
+		(scrollPosition <= 0)
+			? scrollDirection = 'up'
+			: (scrollPosition > previousScrollPosition)
+				? scrollDirection = 'down'
+				: scrollDirection = 'up';
 
-			previousScrollPosition = scrollPosition;
+		previousScrollPosition = scrollPosition;
 
-			return scrollDirection;
+		return scrollDirection;
 	};
 	const handleScroll = () => {
 		const navContainer = document.getElementById('navbar');
@@ -144,5 +145,4 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
     }
   });
 	//#endregion
-	
 </script>

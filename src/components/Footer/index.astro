@@ -46,6 +46,7 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 	}
 
 	.me { font-size: var(--font-small); }
+
 	.separator:after {
 		display: block;
 		content: '';
@@ -58,15 +59,16 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 		left: 50%;
 		right: 50%;
 	}
+
 	.social {
 		display: flex;
 		align-items: center;
 		gap: 0 var(--size-xl);
 	}
+
 	.social a {
 		color: var(--black);
 		transition: var(--transition-default);
-
 		&:hover {
 			color: var(--accent);
 			transform: translateY(-2px);

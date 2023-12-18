@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon';
+import { languageIcon } from '@/utils/index';
 
 interface Props {
 	createdAt: Date;
@@ -20,16 +21,6 @@ const {
 	name,
 	websiteUrl,
 } = Astro.props;
-
-const languageIcons: { [key: string]: string } = {
-	astro: 'simple-icons:astro',
-	css: 'simple-icons:css3',
-	html: 'simple-icons:html5',
-	javascript: 'simple-icons:javascript',
-	react: 'simple-icons:react',
-	shell: 'simple-icons:powershell',
-	typescript: 'simple-icons:typescript',
-};
 ---
 
 <div class='card-container animated-card-project'>
@@ -43,7 +34,7 @@ const languageIcons: { [key: string]: string } = {
 		<div class='description'>{description}</div>
 		{language && (
 			<div class='language'>
-				<Icon name={languageIcons[language.toLowerCase()]} width='14' height='14'/>
+				<Icon name={languageIcon[language.toLocaleLowerCase()]?.icon} width='14' height='14'/>
 				{language}
 			</div>
 		)}
@@ -80,10 +71,7 @@ const languageIcons: { [key: string]: string } = {
 		height: 15rem;
 		overflow: hidden;
 		transition: var(--transition-default);
-
-		&:hover {
-			transform: translateY(-3px);
-		}
+		&:hover { transform: translateY(-3px); }
 
 		@media screen and (max-width: 650px) {
 			width: 80%;
@@ -95,6 +83,7 @@ const languageIcons: { [key: string]: string } = {
 			}
 		};
 	}
+
 	.content-container {
 		flex-grow: 1;
 		display: flex;
@@ -103,35 +92,41 @@ const languageIcons: { [key: string]: string } = {
 		padding: var(--size-lg);
 		text-transform: lowercase;
 	}
+
 	.content-header {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		margin-bottom: var(--size-md);
 	}
+
 	.name { font-size: var(--font-large); }
+
 	.created-at { font-size: var(--font-small); }
+
 	.description {
 		font-family: 'Sometype Mono', monospace;
 		letter-spacing: -1px;
 		font-size: var(--font-default);
 	}
+
 	.language {
 		font-size: var(--font-small);
 		display: flex;
 		align-items: center;
 		gap: var(--size-xxs);
 	}
+
 	.links-container {
 		display: flex;
 		align-items: center;
 		background-color: var(--white-3);
 		transition: var(--transition-default);
-		
 		&:hover {
 			background-color: var(--linksContainerHoverEffect);
 		}
 	}
+
 	.separator {
 		display: block;
 		position: absolute;
@@ -143,6 +138,7 @@ const languageIcons: { [key: string]: string } = {
 		margin: 49.3%;
 		transition: var(--transition-default);
 	}
+
 	.links-container a {
 		display: flex;
 		align-items: center;
