@@ -1,4 +1,5 @@
 ---
+import Switch from '@/components/Switch/index.astro';
 import { sanityClient } from '@/data/sanity';
 import type { DataFooter } from '@/types/index';
 import { Icon } from 'astro-icon';
@@ -7,8 +8,8 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 ---
 
 <footer>
-	<div class='me'>
-		hedik
+	<div id='settings-cog' class='settings'>
+		<Icon name='ri:settings-3-line' width={23} height={23} />
 	</div>
 	<div class='separator'/>
 	<div class='social'>
@@ -18,6 +19,15 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 			</a>
 		))}
 	</div>
+	<div id='settings-panel' class='settings-panel'>
+		<Switch
+			label='use dark theme'
+			checkIsSwitched="return (localStorage.getItem('theme') === 'dark');"
+			toggleOn="document.documentElement.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark');"
+			toggleOff="document.documentElement.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light');"
+		/>
+	</div>
+	<div id='overlay' class='overlay' />
 </footer>
 
 <style>
@@ -45,7 +55,72 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 		};
 	}
 
-	.me { font-size: var(--font-small); }
+	.settings {
+		color: var(--black);
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2px;
+		z-index: 999;
+		transition: var(--transition-slow);
+		&:hover { transform: rotate(90deg); }
+	}
+
+	.settings-panel {
+		min-width: 250px;
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		justify-content: center;
+		border: 1px solid #3c3c3c;
+		border-radius: 4px;
+		padding: var(--size-s);
+		font-size: var(--font-small);
+		position: absolute;
+		background-color: var(--white);
+		left: 18px;
+		bottom: 34px;
+		opacity: 0;
+		visibility: hidden;
+		transition: var(--transition-default);
+		z-index: 998;
+
+		@media screen and (max-width: 650px) {
+			left: 0;
+			bottom: -100%;
+			width: 100%;
+			min-height: 10vh;
+			box-sizing: border-box;
+			justify-content: start;
+			align-items: center;
+			border-radius: 12px 12px 0 0;
+		};
+	}
+	.settings-panel-visible {
+		bottom: 40px;
+		opacity: 1;
+		visibility: visible;
+
+		@media screen and (max-width: 650px) {
+			left: 0; bottom: -10px;
+		};
+	}
+
+	.overlay {
+		width: 100vw;
+		height: 100vh;
+		position: fixed;
+		top: 0; left: 0;
+		visibility: hidden;
+		transition: var(--transition-default);
+		z-index: 0;
+	}
+	.overlay-visible {
+		backdrop-filter: blur(4px);
+		visibility: visible;
+		z-index: 1;
+	}
 
 	.separator:after {
 		display: block;
@@ -75,3 +150,26 @@ const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`)
 		}
 	}
 </style>
+
+<script>
+	import { throttle } from "@/utils/index";
+
+	const settingsCog = document.getElementById('settings-cog');
+	const settingsPanel = document.getElementById('settings-panel');
+	const overlay = document.getElementById('overlay');
+
+	settingsCog?.addEventListener('click', () => throttle(() => {
+		settingsPanel?.classList.toggle('settings-panel-visible');
+		overlay?.classList.toggle('overlay-visible');
+	}, 100));
+
+	settingsCog?.addEventListener('touchstart', () => throttle(() =>{
+		settingsPanel?.classList.toggle('settings-panel-visible');
+		overlay?.classList.toggle('overlay-visible');
+	}, 100));
+
+	overlay?.addEventListener('click', () => throttle(() =>{
+		settingsPanel?.classList.toggle('settings-panel-visible');
+		overlay?.classList.toggle('overlay-visible');
+	}, 100));
+</script>

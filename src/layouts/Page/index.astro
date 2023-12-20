@@ -59,24 +59,6 @@ const { seo, title } = Astro.props;
 		/* global */
 		--page-desktop-width: 85%;
 		--page-mobile-width: 100%;
-		/* themes */
-		--accent: #dd2c2c;
-		--black: #131313;  
-		--black-2: #232323;
-		--black-3: #333333;
-		--black-4: #3c3c3c;
-		--green: #74e77e;
-		--grey: #d4d4d4;
-		--grey-2: #c0c0c0;
-		--grey-3: #b6b6b6;
-		--grey-4: #ababab;
-		--red: #e56161;
-		--white-base: #fff;
-		--white: #fcfcfc;
-		--white-2: #f0f0f0;
-		--white-3: #ececec;
-		--white-4: #e8e8e8;
-		--white-5: #e4e4e4;
 		/* font-sizes */
 		--font-small: 0.8rem;
 		--font-default: 0.95rem;
@@ -97,15 +79,63 @@ const { seo, title } = Astro.props;
 		--transition-slow: .4s;
 	}
 
+	[data-theme="light"] {
+		/* global */
+		--hedik-logo: url('../../logo_hedik_x64.png');
+		/* themes */
+		--accent: #dd2c2c;
+		--black: #131313;  
+		--black-2: #232323;
+		--black-3: #333333;
+		--black-4: #3c3c3c;
+		--green: #74e77e;
+		--grey: #d4d4d4;
+		--grey-2: #c0c0c0;
+		--grey-3: #b6b6b6;
+		--grey-4: #ababab;
+		--red: #e56161;
+		--white-base: #fff;
+		--white: #fcfcfc;
+		--white-2: #f0f0f0;
+		--white-3: #ececec;
+		--white-4: #e8e8e8;
+		--white-5: #e4e4e4;
+	}
+
+	[data-theme="dark"] {
+		/* global */
+		--hedik-logo: url('../../logo_hedik_white_x64.png');
+		/* themes */
+		--accent: #cf2a2a;
+		--black: #f5f5f5;  
+		--black-2: #f0f0f0;
+		--black-3: #ececec;
+		--black-4: #e8e8e8;
+		--green: #6fd478;
+		--grey: #505050;
+		--grey-2: #5b5b5b;
+		--grey-3: #717171;
+		--grey-4: #818181;
+		--red: #d85e5e;
+		--white-base: #121212;
+		--white: #131313;
+		--white-2: #232323;
+		--white-3: #333333;
+		--white-4: #3c3c3c;
+		--white-5: #424242;
+	}
+
 	html {
 		font-family: 'LondonUnderground';
-		background-color: var(--white);
-		color: var(--black);
 		font-size: var(--font-default);
 		text-transform: lowercase;
 	}
-
-	body { margin: 0; padding: 0; border: 0; }
+	
+	body {
+		background-color: var(--white);
+		color: var(--black);
+		margin: 0; padding: 0; border: 0;
+	}
 
 	main {
 		width: var(--page-desktop-width);
@@ -181,3 +211,10 @@ const { seo, title } = Astro.props;
 	.animated-slideIn { animation: slideIn 0.7s ease-in-out forwards; }
 	.animated-fadeIn { animation: fadeIn 0.7s ease-in-out forwards; }
 </style>
+
+<script is:inline>
+	const currentTheme = localStorage.getItem('theme');
+	if (currentTheme) {
+		document.documentElement.setAttribute('data-theme', currentTheme);
+	}
+</script>

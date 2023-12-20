@@ -1,0 +1,103 @@
+---
+interface Props {
+	label: string;
+	checkIsSwitched: string;
+	toggleOn: string;
+	toggleOff: string;
+}
+
+const {
+	label,
+	checkIsSwitched,
+	toggleOn,
+	toggleOff,
+} = Astro.props;
+---
+<div
+	id='component-container'
+	class='switch-container'
+	data-isswitched={checkIsSwitched}
+	data-toggleon={toggleOn}
+	data-toggleoff={toggleOff}
+>
+	<label class='switch' for='checkbox'>
+		<input id='checkbox' type='checkbox' />
+		<div id='slider' class='slider circle' />
+	</label>
+	<em> {label} </em>
+</div>
+
+<style>
+	.switch-container {
+		display: flex;
+		align-items: center;
+		gap: var(--size-s);
+	}
+
+	.switch {
+		position: relative;
+		width: 40px;
+		height: 18px;
+	}
+
+	.switch input { display:none; }
+
+	.slider {
+		background-color: var(--grey);
+		position: absolute;
+		top: 0; right: 0; bottom: 0; left: 0;
+		cursor: pointer;
+		transition: var(--transition-slow);
+	}
+
+	.slider:before {
+		content: '';
+		display: block;
+		background-color: var(--accent);
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		bottom: 4px;
+		left: 4px;
+		transition: var(--transition-slow);
+	}
+
+	.slider-checked { background-color: var(--black-4); }
+
+	.slider-checked:before { transform: translateX(22px); }
+
+	.slider.circle { border-radius: 100px; }
+
+	.slider.circle:before { border-radius: 50%; }
+</style>
+
+<script>
+	const component = document.getElementById('component-container')
+	const checkbox = document.getElementById('checkbox');
+	const slider = document.getElementById('slider');
+	const isSwitched = component?.dataset.isswitched && new Function(component?.dataset.isswitched)();
+
+	if (isSwitched) {
+		slider?.classList.add('slider-checked');
+	} else {
+		slider?.classList.remove('slider-checked');
+	}
+
+	const handleSwitch = (event: Event) => {
+		if ((event.target as HTMLInputElement).checked) {
+			component?.dataset.toggleoff && new Function(component?.dataset.toggleoff)();
+		}
+		else {
+			component?.dataset.toggleon && new Function(component?.dataset.toggleon)();
+		}
+	}
+
+	checkbox?.addEventListener(
+		'click',
+		(event) => {
+			slider?.classList.toggle('slider-checked');
+			handleSwitch(event);
+		},
+		false,
+	);
+</script>
