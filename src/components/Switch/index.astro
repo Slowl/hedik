@@ -83,21 +83,17 @@ const {
 		slider?.classList.remove('slider-checked');
 	}
 
-	const handleSwitch = (event: Event) => {
-		if ((event.target as HTMLInputElement).checked) {
-			component?.dataset.toggleoff && new Function(component?.dataset.toggleoff)();
-		}
-		else {
-			component?.dataset.toggleon && new Function(component?.dataset.toggleon)();
-		}
+	const handleSwitch = () => {
+		slider?.classList.contains('slider-checked')
+			? component?.dataset.toggleoff && new Function(component?.dataset.toggleoff)()
+			: component?.dataset.toggleon && new Function(component?.dataset.toggleon)();
 	}
 
 	checkbox?.addEventListener(
-		'click',
-		(event) => {
+		'change',
+		() => {
+			handleSwitch();
 			slider?.classList.toggle('slider-checked');
-			handleSwitch(event);
-		},
-		false,
+		}
 	);
 </script>
