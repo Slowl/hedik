@@ -7,9 +7,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 <nav id='navbar'>
 	<div class='left-container'>
-		<a href='/' title='home'>
-			<!-- <Fragment set:html={LogoSvg} /> -->
-		</a>
+		<a href='/' title='home' />
 	</div>
 	<div class='right-container'>
 		{dataNavbar.links.map((link) => (
@@ -62,6 +60,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 	.left-container {
 		& a {
+			position: relative;
 			display: block;
 			background-image: var(--hedik-logo);
 			background-repeat: no-repeat;

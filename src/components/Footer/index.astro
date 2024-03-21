@@ -2,7 +2,7 @@
 import Switch from '@/components/Switch/index.astro';
 import { sanityClient } from '@/data/sanity';
 import type { DataFooter } from '@/types/index';
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 const dataFooter: DataFooter = await sanityClient.fetch(`*[_id == "footer"][0]`);
 ---

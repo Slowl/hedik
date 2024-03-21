@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 import { languageIcon } from '@/utils/index';
 
 interface Props {
@@ -34,18 +34,18 @@ const {
 		<div class='description'>{description}</div>
 		{language && (
 			<div class='language'>
-				<Icon name={languageIcon[language.toLocaleLowerCase()]?.icon} width='14' height='14'/>
+				<Icon name={languageIcon[language.toLocaleLowerCase()]?.icon} width={14} height={14}/>
 				{language}
 			</div>
 		)}
 	</div>
 	<div class='links-container'>
 		<a href={githubUrl} title={`${name} github`} target='_blank' rel='noreferrer noopener'> 
-			<Icon name='ri:github-fill' width='18' height='18' /> github
+			<Icon name='ri:github-fill' width={18} height={18} /> github
 		</a>
 		{websiteUrl && (
 			<a href={websiteUrl} title={`${name} website`} target='_blank' rel='noreferrer noopener'>
-				<Icon name='ri:link-m' width='18' height='18' /> website
+				<Icon name='ri:link-m' width={18} height={18} /> website
 			</a>
 			<div class='separator' />
 		)}

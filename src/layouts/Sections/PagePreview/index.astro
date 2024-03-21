@@ -1,5 +1,5 @@
 ---
-import Icon from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
 	title: string;
@@ -22,7 +22,7 @@ const { title, pageUrl, quantity } = Astro.props;
 	{(quantity && (quantity >= 3))
 		? (
 			<a class='see-more' href={pageUrl} title={`see more ${title}`}>
-				<Icon width='30px' height='30px' name='pixelarticons:chevron-right' />
+				<Icon width={30} height={30} name='pixelarticons:chevron-right' />
 			</a>
 		)
 		: <div title='placeholder' />

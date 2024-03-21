@@ -216,7 +216,7 @@ export const languageIcon: { [key: string]: { name: string; icon: string; } } = 
 	},
 	'sanity': {
 		name: 'sanity',
-		icon: 'fluent:dismiss-circle-16-regular'
+		icon: 'simple-icons:sanity'
 	},
 	'strapi': {
 		name: 'strapi',

@@ -1,6 +1,7 @@
 import { loadEnv } from 'vite';
 import { defineConfig } from 'astro/config';
-import { sanityIntegration } from '@sanity/astro';
+import sanity from "@sanity/astro";
+import icon from 'astro-icon';
 
 const {
 	VITE_SANITY_STUDIO_PROJECT_ID,
@@ -12,7 +13,8 @@ export default defineConfig({
 		contentCollectionCache: true,
 	},
 	integrations: [
-		sanityIntegration({
+		icon(),
+		sanity({
 			projectId: VITE_SANITY_STUDIO_PROJECT_ID,
 			dataset: VITE_SANITY_STUDIO_DATASET,
 			apiVersion: '2023-12-10',

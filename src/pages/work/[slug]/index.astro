@@ -5,7 +5,7 @@ import PortableText from '@/components/PortableText/index.astro';
 import { sanityClient } from '@/data/sanity';
 import type { DataWork } from '@/types/index';
 import { urlForImage, languageIcon } from '@/utils/index';
-import Icon from 'astro-icon';
+import { Icon } from 'astro-icon/components';
 
 export const getStaticPaths = async () => {
 	const works = await sanityClient.fetch(`*[_type == "work"]`);
@@ -40,7 +40,7 @@ const { work }: {
 		<div class='language-container'>
 			{work.languages.map((language) => (
 				<div class='language'>
-					<Icon name={languageIcon[language]?.icon} width='16' height='16' />
+					<Icon name={languageIcon[language]?.icon} width={16} height={16} />
 					{languageIcon[language]?.name}
 				</div>
 			))}
