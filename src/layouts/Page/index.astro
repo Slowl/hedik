@@ -55,6 +55,10 @@ const { seo, title } = Astro.props;
 		to { opacity: 1; transform: translateY(0); }
 	}
 
+	@view-transition {
+    navigation: auto;
+  }
+
 	:root {
 		/* global */
 		--page-desktop-width: 85%;
