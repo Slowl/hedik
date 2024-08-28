@@ -22,7 +22,8 @@
     "astro": "^4.14.6",
     "astro-icon": "^1.1.1",
     "astro-portabletext": "^0.10.0",
-    "sanity": "^3.56.0"
+    "sanity": "^3.56.0",
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.3.0",
