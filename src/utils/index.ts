@@ -1,5 +1,6 @@
 
 import { sanityClient } from '@/data/sanity';
+import type { Image } from 'sanity';
 import imageUrlBuilder from '@sanity/image-url';
 
 //#region THROTTLE FUNCTION
@@ -71,7 +72,7 @@ export const imageBuilder = imageUrlBuilder(sanityClient);
 /**
  * Function to extract the url from the image built by Sanity's utils.
  */
-export const urlForImage = (source: string) => imageBuilder.image(source);
+export const urlForImage = (source: Image) => imageBuilder.image(source);
 //#endregion
 
 //#region SANITIZER FUNCTION

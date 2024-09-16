@@ -1,5 +1,5 @@
 
-import type { PortableTextBlock, Slug } from 'sanity';
+import type { Image, PortableTextBlock, Slug } from 'sanity';
 
 export interface DataRepository {
 	created_at: Date;
@@ -18,11 +18,18 @@ export interface DataWork {
 	description: PortableTextBlock;
 	gallery?: string[];
 	languages: string[];
-	logo: string;
+	logo: Image;
 	name: string;
 	project: string;
 	slug: Slug;
 	url: string;
+}
+
+export interface DataAbout {
+	description: PortableTextBlock;
+	fullname: string;
+	profile: Image & { name: string; description: string };
+	isAvailable: boolean;
 }
 
 export interface DataFooter {

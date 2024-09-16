@@ -10,8 +10,18 @@ const components = {
 
 const { value } = Astro.props;
 ---
+<div class='text-container'>
+	<PortableTextInternal
+		value={value}
+		components={components}
+	/>
+</div>
 
-<PortableTextInternal
-	value={value}
-	components={components}
-/>
+<style>
+	.text-container {
+		display: flex;
+		flex-direction: column;
+		gap: .4rem;
+		a { color: var(--accent); }
+	}
+</style>

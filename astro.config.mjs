@@ -12,6 +12,7 @@ export default defineConfig({
 	experimental: {
 		contentCollectionCache: true,
 	},
+	image: { domains: ['https://cdn.sanity.io'] },
 	integrations: [
 		icon(),
 		sanity({
