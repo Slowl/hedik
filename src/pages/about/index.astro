@@ -59,6 +59,9 @@ const { isAvailable =  dataAbout.isAvailable } = Astro.props
 		.profile-picture {
 			position: relative;
 			width: 175px; height: 175px;
+			filter: blur(0);
+			opacity: 1;
+			transition: .5s ease .5s;
 			img { border-radius: 50%; }
 			&:after {
 				display: block;
@@ -70,6 +73,10 @@ const { isAvailable =  dataAbout.isAvailable } = Astro.props
 				border: 3px solid var(--white);
 				border-radius: 50%;
 				background-color: var(--isAvailable);
+			}
+			@starting-style {
+				filter: blur(7px);
+				opacity: 0;
 			}
 		}
 		.informations {
@@ -94,7 +101,9 @@ const { isAvailable =  dataAbout.isAvailable } = Astro.props
 		@media screen and (max-width: 650px) { width: 80%; }; 
 	}
 	.description {
-		font-size: var(--font-small);
-		line-height: 1.4rem;
+		font-size: var(--font-default);
+		line-height: 1.3rem;
+		font-family: 'Sometype Mono', monospace;
+		letter-spacing: -1px;
 	}
 </style>

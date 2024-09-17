@@ -156,6 +156,16 @@ const { seo, title } = Astro.props;
 		};
 	}
 
+	img {
+		opacity: 1;
+		transition: .5s ease .5s;
+		z-index: -999;
+		@starting-style {
+			filter: blur(7px);
+			opacity: 0;
+		}
+	}
+
 	.presentation-title {
 		display: flex;
 		flex-direction: column;
