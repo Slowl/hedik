@@ -39,7 +39,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 		transition: var(--transition-slow);
 		z-index: 999;
 
-		@media screen and (max-width: 650px) {
+		@media screen and (max-width: 40.625rem) {
 			padding: 0 var(--size-s);
 			margin-bottom: 2rem;
 			.right-container {
@@ -49,7 +49,7 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 				width: 5px; height: 5px;
 			}
 		};
-		@media screen and (min-width: 651px) and (max-width: 1024px) {
+		@media screen and (min-width: 40.688rem) and (max-width: 64rem) {
 			margin-bottom: 4rem;
 		}
 	}

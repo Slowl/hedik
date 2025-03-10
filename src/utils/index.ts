@@ -9,14 +9,14 @@ let throttlePause: boolean;
  * A throttle function, mainly used inside Navbar component.
  */
 export const throttle = (callback: () => void, time = 200) => {
-  if (throttlePause) return;
-  throttlePause = true;
-  
-  setTimeout(() => {
-    callback();
-    
-    throttlePause = false;
-  }, time);
+	if (throttlePause) return;
+	throttlePause = true;
+	
+	setTimeout(() => {
+		callback();
+		
+		throttlePause = false;
+	}, time);
 };
 //#endregion
 
@@ -54,8 +54,7 @@ export const useFetch = async ({ url, params }: { url: string; params?: string }
 	try {
 		const response = await fetch(`${url}${params ? `?${params}` : ''}`);
 		data = await response.json();
-	} catch(e) {
-		error = e;
+	} catch(error) {
 		throw new Error(`Request failed: ${error}`);
 	} finally {
 		return { data, error };
@@ -80,19 +79,19 @@ export const urlForImage = (source: Image) => imageBuilder.image(source);
  * Function to sanitize user's texts sent from clients.
  */
 export const sanitize = (value: string) => {
-  const map: { [key: string]: string } = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#x27;',
-      '/': '&#x2F;',
-			'`': '&#x60;',
-			'=': '&#x3D;',
-  };
-  const regexRule = new RegExp(/[&<>"'/`=]/ig);
+	const map: { [key: string]: string } = {
+		'&': '&amp;',
+		'<': '&lt;',
+		'>': '&gt;',
+		'"': '&quot;',
+		"'": '&#x27;',
+		'/': '&#x2F;',
+		'`': '&#x60;',
+		'=': '&#x3D;',
+	};
+	const regexRule = new RegExp(/[&<>"'/`=]/ig);
 
-  return value.replace(regexRule, (match) => map[match]!);
+	return value.replace(regexRule, (match) => map[match]!);
 };
 //#endregion 
 

@@ -19,7 +19,7 @@ const { seo, title } = Astro.props;
 		<title>hedik • {seo.title}</title>
 		<meta name='description' content={seo.description}>
 		<meta charset='UTF-8' />
-		<meta name='viewport' content="width=device-width, initial-scale=1" />
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
 		<meta name='theme-color' content='#fff'>
 		<meta name='generator' content={Astro.generator} />
 		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
@@ -83,7 +83,7 @@ const { seo, title } = Astro.props;
 		--transition-slow: .4s;
 	}
 
-	[data-theme="light"] {
+	[data-theme='light'] {
 		/* global */
 		--hedik-logo: url('../../logo_hedik_x64.png');
 		/* themes */
@@ -106,7 +106,7 @@ const { seo, title } = Astro.props;
 		--white-5: #e4e4e4;
 	}
 
-	[data-theme="dark"] {
+	[data-theme='dark'] {
 		/* global */
 		--hedik-logo: url('../../logo_hedik_white_x64.png');
 		/* themes */
@@ -131,7 +131,6 @@ const { seo, title } = Astro.props;
 
 	html {
 		font-family: 'LondonUnderground';
-		font-size: var(--font-default);
 		text-transform: lowercase;
 	}
 	
@@ -139,6 +138,7 @@ const { seo, title } = Astro.props;
 		background-color: var(--white);
 		color: var(--black);
 		margin: 0; padding: 0; border: 0;
+		font-size: var(--font-default);
 	}
 
 	main {
@@ -149,7 +149,7 @@ const { seo, title } = Astro.props;
 		flex-direction: column;
 		gap: 8rem 0;
 
-		@media screen and (max-width: 650px) {
+		@media screen and (max-width: 40.625rem) {
 			width: var(--page-mobile-width);
 			padding: var(--size-md) 0 4rem;
 			gap: 5rem 0;
@@ -186,7 +186,7 @@ const { seo, title } = Astro.props;
 			margin-right: -8px;
 		}
 
-		@media screen and (max-width: 650px) {
+		@media screen and (max-width: 40.625rem) {
 			position: relative;
 			top: 0;
 			left: 0px;
@@ -203,7 +203,7 @@ const { seo, title } = Astro.props;
 				transform: translateY(55px);
 			}
 		};
-		@media screen and (min-width: 651px) and (max-width: 1024px) {
+		@media screen and (min-width: 40.688rem) and (max-width: 64rem) {
 			position: relative;
 			top: 0;
 			left: 0;
