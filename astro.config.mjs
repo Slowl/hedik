@@ -10,6 +10,13 @@ const {
 
 export default defineConfig({
 	image: { domains: ['https://cdn.sanity.io'] },
+	vite: {
+		build: {
+			rollupOptions: {
+				external: ['react'],
+			}
+		}
+	},
 	integrations: [
 		icon({
 			include: {
