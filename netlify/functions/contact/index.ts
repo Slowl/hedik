@@ -16,7 +16,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 			email: SENDER_EMAIL || '',
 			name: `${formData.firstname} ${formData.lastname}`
 		},
-		subject: `HediK - ${formData.subject}`,
+		subject: 'HediK • Contact from website',
 		html: `
 			<p>From ${formData.firstname} ${formData.lastname} - ${formData.email}</p>
 			<p>Message:</p>

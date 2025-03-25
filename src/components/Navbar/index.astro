@@ -114,6 +114,19 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 
 <script>
 	import { throttle } from '@/utils/index';
+
+	//#region HANDLE CURRENT PAGE
+	const navLinks: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav-link');
+	const currentBasePage = window.location.pathname.split('/').filter(Boolean).at(0);
+
+	navLinks.forEach((link) => {
+		const currentPage = window.location.pathname.split('/').filter(Boolean).at(-1)
+		if (currentPage && (currentBasePage === currentPage) && (link.href.includes(currentPage))) {
+			link.classList.add('nav-link-current');
+		}
+	});
+	//#endregion
+
 	//#region HANDLE SCROLL
 	let previousScrollPosition = Math.min(window.scrollY, 0);
 	const scrollDirection = () => {
@@ -138,17 +151,5 @@ const dataNavbar: DataNavbar = await sanityClient.fetch(`*[_id == "navbar"][0]`)
 			: navContainer?.classList.remove('nav-hidden');
 	};
 	window.addEventListener('scroll', () => throttle(handleScroll, 200));
-	//#endregion
-
-	//#region HANDLE CURRENT PAGE
-	const navLinks: NodeListOf<HTMLLinkElement> = document.querySelectorAll('.nav-link');
-	const currentBasePage = window.location.pathname.split('/').filter(Boolean).at(0);
-
-  navLinks.forEach((link) => {
-		const currentPage = window.location.pathname.split('/').filter(Boolean).at(-1)
-    if (currentPage && (currentBasePage === currentPage) && (link.href.includes(currentPage))) {
-      link.classList.add('nav-link-current');
-    }
-  });
 	//#endregion
 </script>

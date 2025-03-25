@@ -27,6 +27,7 @@ export default defineConfig({
 					'javascript', 'typescript', 'html5', 'css3', 'react', 'nextdotjs', 'astro', 'nodedotjs',
 					'firebase', 'supabase', 'redux', 'graphql', 'styledcomponents', 'materialdesign', 'sanity', 'strapi',
 					'powershell', 'github', 'linkedin', 'twitter', 'spotify', 'steam', 'instagram', 'bluesky', 'youtubemusic', 'malt',
+					'upwork', 'freelancermap', 'toptal',
 				],
 			},
 		}),
