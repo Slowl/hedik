@@ -34,7 +34,7 @@ const { isAvailable =  dataAbout.isAvailable } = Astro.props
 		<div class='informations'>
 			<div class='fullname'> {dataAbout.fullname} </div>
 			<div class:list={`status ${isAvailable ? 'available' : 'not-available'}`}>
-				{isAvailable ? 'available for work' : 'not available for work atm'}
+				{isAvailable ? 'available for work' : 'retired, working for myself'}
 			</div>
 		</div>
 		<div class='description'>
