@@ -1,24 +1,23 @@
 
-import sendGrid from '@sendgrid/mail';
+import { Resend } from 'resend';
 import { Handler, HandlerEvent } from '@netlify/functions';
 import { isFormValid } from '../../../src/utils';
 
-const { SENDGRID_API_KEY, RECEIVER_EMAIL, SENDER_EMAIL } = process.env;
+const { RESEND_API_KEY, RECEIVER_EMAIL, SENDER_EMAIL } = process.env;
+
+const resend = new Resend(RESEND_API_KEY);
 
 export const handler: Handler = async (event: HandlerEvent) => {
-	sendGrid.setApiKey(SENDGRID_API_KEY || '');
 	const formData = event.body && JSON.parse(event.body);
 	const formValidity = isFormValid(formData);
 
 	const data = {
 		to: RECEIVER_EMAIL || '',
-		from: {
-			email: SENDER_EMAIL || '',
-			name: `${formData.firstname} ${formData.lastname}`
-		},
+		from: SENDER_EMAIL || '',
 		subject: 'HediK • Contact from website',
 		html: `
-			<p>From ${formData.firstname} ${formData.lastname} - ${formData.email}</p>
+			<p>From ${formData.firstname} ${formData.lastname} —— ${formData.email}</p>
+
 			<p>Message:</p>
 			${formData.message.replace('\n', '<br />')}
 		`,
@@ -26,7 +25,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 
 	if (formValidity.isValid) {
 		try {
-			await sendGrid.send(data);
+			await resend.emails.send(data);
 	
 			return {
 				statusCode: 200,
@@ -36,7 +35,7 @@ export const handler: Handler = async (event: HandlerEvent) => {
 					response: 'Message sent successfully.',
 				}),
 			};
-		} catch (error) {
+		} catch (error: any) {
 			return {
 				statusCode: error.code,
 				headers: { 'Content-Type': 'application/json' },
