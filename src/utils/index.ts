@@ -162,6 +162,10 @@ export const languageIcon: { [key: string]: { name: string; icon: string; } } = 
 		name: 'typescript',
 		icon: 'simple-icons:typescript'
 	},
+	'html': {
+		name: 'html5',
+		icon: 'simple-icons:html5'
+	},
 	'html5': {
 		name: 'html5',
 		icon: 'simple-icons:html5'
